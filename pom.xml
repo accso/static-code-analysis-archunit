@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.accso</groupId>
+	<artifactId>static-code-analysis-archunit</artifactId>
+	<packaging>pom</packaging>
+	<version>0.1</version>
+
+	<properties>
+		<java.version>11</java.version>
+
+		<kotlin.version>1.4.21-2</kotlin.version>
+		<kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+
+		<archunit.version>0.21.0</archunit.version>
+
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss'Z'</maven.build.timestamp.format>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>library-example</module>
+		<module>dependency-analyzer</module>
+		<module>architecture-tests</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.21.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit</artifactId>
+			<version>${archunit.version}</version>
+			<!-- scope>test</scope -->
+		</dependency>
+	</dependencies>
+</project>

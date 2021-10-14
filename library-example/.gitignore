@@ -1,0 +1,7 @@
+/target/
+/logs/
+/.settings/
+
+# Datenbank-Dateien
+library*db
+

@@ -21,3 +21,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+### IntelliJ
+.idea/
+out/
+*.iml
+target/
+architecture-tests/target/
+dependency-analyzer/target/
+library-example/target/
