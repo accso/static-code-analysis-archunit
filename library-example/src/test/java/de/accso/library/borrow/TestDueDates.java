@@ -48,7 +48,7 @@ public class TestDueDates extends AbstractTestWithDataFromExcelSheet {
 
 	@Test
 	public void testDueDatesMovies() {
-		Movie m1 = new Movie(titleGreatMovie, "Me", StorageType.BLUERAY);
+		Movie m1 = new Movie(titleGreatMovie, "Me", StorageType.BLURAY);
 		movieDao.save(m1);
 		createInstanceFor(titleGreatMovie);
 		createUnavailableInstanceFor(titleGreatMovie);
