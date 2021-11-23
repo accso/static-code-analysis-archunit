@@ -26,7 +26,7 @@ public enum MediaType {
 		switch (movie.getStorageType()) {
 		case DVD:
 			return MOVIE_ON_DVD;
-		case BLUERAY:
+		case BLURAY:
 			return MOVIE_ON_BLURAY;
 		default:
 			return null;
