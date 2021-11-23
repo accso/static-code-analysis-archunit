@@ -23,7 +23,7 @@ class ArchitectureTest {
                 .and().areNotEnums()
                 .and().areNotInnerClasses()
                 .should().beAnnotatedWith(Entity.class)
-                .orShould().beAnnotatedWith(Embeddable.class)
+              //  .orShould().beAnnotatedWith(Embeddable.class)
                 .check(classes);
     }
 
