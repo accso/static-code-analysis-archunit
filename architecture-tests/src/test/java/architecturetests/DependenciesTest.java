@@ -18,7 +18,8 @@ public class DependenciesTest {
 
     @Test
     void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
-        ArchRuleDefinition.classes().that().resideInAPackage("..common..")
+        ArchRuleDefinition.classes()
+                .that().resideInAPackage("..common..")
                 .should().onlyDependOnClassesThat().resideInAnyPackage("..common..", "java..", "org..")
                 .check(classesFromLibraryExample);
     }
@@ -26,8 +27,8 @@ public class DependenciesTest {
     @Test
     void testThatLibraryUtilClassesDependOnlyContainJavaStandardClasses() {
 
-        ArchRule dependRule = ArchRuleDefinition.classes().that()
-                .resideInAPackage("..util..")
+        ArchRule dependRule = ArchRuleDefinition.classes()
+                .that().resideInAPackage("..util..")
                 .should()
                 .onlyDependOnClassesThat()
                 .resideInAnyPackage("java..") ;
