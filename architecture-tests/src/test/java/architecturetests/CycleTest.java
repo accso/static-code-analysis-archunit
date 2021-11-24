@@ -2,6 +2,7 @@ package architecturetests;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 import org.junit.jupiter.api.Test;
 
 public class CycleTest {
@@ -14,6 +15,21 @@ public class CycleTest {
      */
 
     @Test
-    void test_something() {
+    void testFirstLevelPackagesMustBeFreeOfCycles() {
+        SlicesRuleDefinition.slices()
+                .matching("de.accso.library.(*)..")
+                .should()
+                .beFreeOfCycles()
+                .check(classesFromLibraryExample);
     }
+
+    @Test
+    void testAllPackagesMustBeFreeOfCycles() {
+        SlicesRuleDefinition.slices()
+                .matching("de.accso.library.(**)..")
+                .should()
+                .beFreeOfCycles()
+                .check(classesFromLibraryExample);
+    }
+
 }
