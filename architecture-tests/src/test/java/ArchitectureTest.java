@@ -1,45 +1,66 @@
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+
 class ArchitectureTest {
 
     private JavaClasses classes = new ClassFileImporter().importPackages("de.accso.library");
 
-    @Test
-    void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
-         ArchRuleDefinition.classes().that().resideInAPackage("..common..")
-                .should().onlyDependOnClassesThat().resideInAnyPackage("..common..", "java..", "org..")
-                .check(classes);
-    }
 
     @Test
+    void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
+         classes().that().resideInAPackage("..common..")
+                .should().onlyDependOnClassesThat().resideInAnyPackage("..common..", "java..", "org..")
+                 .check(classes);
+    }
+
+
+    /**
+     * Freeze Rule für Annotationen
+     */
+    @Test
     void testEntityClassesHaveToBeAnnotatedAsSuch() {
-        ArchRuleDefinition.classes().that().resideInAPackage("..model..")
-                .and().areNotEnums()
-                .and().areNotInnerClasses()
-                .should().beAnnotatedWith(Entity.class)
-              //  .orShould().beAnnotatedWith(Embeddable.class)
-                .check(classes);
+
+       ArchRule annotationRule = classes().that().resideInAPackage("..model..")
+               .and().areNotEnums()
+               .and().areNotInnerClasses()
+               .should().beAnnotatedWith(Entity.class)
+               //  .orShould().beAnnotatedWith(Embeddable.class)
+               ;
+
+       //annotationRule.check(classes);
+
+       ArchRule freezeRule = FreezingArchRule.freeze(
+              annotationRule);
+       freezeRule.check(classes);
+
+       // Check der gleichen Annotations-Regel, aber ohne Freeze
+       // annotationRule.check(classes);
     }
 
     @Test
     void testThatLibraryUtilClassesDependOnlyContainJavaStandardClasses() {
-        ArchRuleDefinition.classes().that()
+
+        ArchRule dependRule = classes().that()
                 .resideInAPackage("..util..")
                 .should()
                 .onlyDependOnClassesThat()
-                .resideInAnyPackage("java..")
-                .check(classes);
+                .resideInAnyPackage("java..") ;
+
+        dependRule.check(classes);
     }
 
     @Test
     void testCorrectDependenciesOfLibraryModelClasses() {
-        ArchRuleDefinition.classes().that()
+        classes().that()
                 .resideInAPackage("..model..")
                 .should()
                 .onlyDependOnClassesThat()
