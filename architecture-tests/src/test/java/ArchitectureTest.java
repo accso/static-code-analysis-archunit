@@ -5,23 +5,19 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
 class ArchitectureTest {
 
-    private JavaClasses classes = new ClassFileImporter().importPackages("de.accso.library");
-
+    private static final String PACKAGE_PREFIX = "de.accso.library";
+    private static JavaClasses classes = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     @Test
     void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
-         classes().that().resideInAPackage("..common..")
+        ArchRuleDefinition.classes().that().resideInAPackage("..common..")
                 .should().onlyDependOnClassesThat().resideInAnyPackage("..common..", "java..", "org..")
                  .check(classes);
     }
-
 
     /**
      * Freeze Rule für Annotationen
@@ -29,7 +25,7 @@ class ArchitectureTest {
     @Test
     void testEntityClassesHaveToBeAnnotatedAsSuch() {
 
-       ArchRule annotationRule = classes().that().resideInAPackage("..model..")
+       ArchRule annotationRule = ArchRuleDefinition.classes().that().resideInAPackage("..model..")
                .and().areNotEnums()
                .and().areNotInnerClasses()
                .should().beAnnotatedWith(Entity.class)
@@ -49,7 +45,7 @@ class ArchitectureTest {
     @Test
     void testThatLibraryUtilClassesDependOnlyContainJavaStandardClasses() {
 
-        ArchRule dependRule = classes().that()
+        ArchRule dependRule = ArchRuleDefinition.classes().that()
                 .resideInAPackage("..util..")
                 .should()
                 .onlyDependOnClassesThat()
@@ -60,7 +56,7 @@ class ArchitectureTest {
 
     @Test
     void testCorrectDependenciesOfLibraryModelClasses() {
-        classes().that()
+        ArchRuleDefinition.classes().that()
                 .resideInAPackage("..model..")
                 .should()
                 .onlyDependOnClassesThat()
