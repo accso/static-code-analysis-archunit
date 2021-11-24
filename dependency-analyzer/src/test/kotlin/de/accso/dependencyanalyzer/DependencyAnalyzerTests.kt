@@ -1,5 +1,9 @@
 package de.accso.dependencyanalyzer
 
+import de.accso.dependencyanalyzer.testset.testpackage14.Middle1
+import de.accso.dependencyanalyzer.testset.testpackage14.Middle2
+import de.accso.dependencyanalyzer.testset.testpackage14.Top1
+import de.accso.dependencyanalyzer.testset.testpackage14.Top2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -437,6 +441,42 @@ class DependencyAnalyzerTests {
                 de.accso.dependencyanalyzer.testset.testpackage13.ClassUsingEnum::class,
                 de.accso.dependencyanalyzer.testset.testpackage13.ClassUsingEnumValue::class
             )
+        )
+    }
+
+    @Test
+    fun `setzt die Abhaengigkeiten in einer korrekten Kette ein`() {
+        // arrange
+        val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
+
+        val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage14.Bottom::class
+
+        // act
+        val dependencyChainsOn = sut.dependencyChainsOn(targetKClazz)
+        // dependentClazzes.forEach{ println(it.from.qualifiedName) }
+
+        // assert
+        assertThat(dependencyChainsOn).isEqualTo(
+                setOf(
+                        DependencyChainForKClazz(Middle1::class,
+                                emptyList(),
+                                targetKClazz),
+                        DependencyChainForKClazz(Middle2::class,
+                                emptyList(),
+                                targetKClazz),
+                        DependencyChainForKClazz(Top1::class,
+                                listOf(Middle1::class),
+                                targetKClazz),
+                        DependencyChainForKClazz(Top1::class,
+                                listOf(Middle2::class),
+                                targetKClazz),
+                        DependencyChainForKClazz(Top2::class,
+                                listOf(Middle1::class),
+                                targetKClazz),
+                        DependencyChainForKClazz(Top2::class,
+                                listOf(Middle2::class),
+                                targetKClazz),
+                )
         )
     }
 }
