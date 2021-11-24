@@ -186,6 +186,7 @@ class DependencyAnalyzerTests {
                 de.accso.dependencyanalyzer.testset.testpackage2.Middle::class,
             )
         )
+//TODO currently broken but why? forward is deactivated, is that the problem?
         assertThat(dependentClazzes.map { it.qualifiedName }).contains(
             "de.accso.dependencyanalyzer.testset.testpackage2.TargetIsUsedAlsoInVariableKt"
         )
@@ -255,6 +256,7 @@ class DependencyAnalyzerTests {
         )
     }
 
+//TODO why is this test green? forwardAnalysis is deactivated. Is the update to a new ArchUnit version the reason?
     @Test
     fun `findet transitiv alle eingehenden Abhaengigkeiten auch ueber den Generic Type in einer Collection`() {
         // arrange
