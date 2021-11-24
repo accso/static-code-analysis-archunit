@@ -19,8 +19,11 @@ public class DependenciesTest {
     @Test
     void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
         ArchRuleDefinition.classes()
-                .that().resideInAPackage("..common..")
-                .should().onlyDependOnClassesThat().resideInAnyPackage("..common..", "java..", "org..")
+                .that()
+                .resideInAPackage("..common..")
+                .should()
+                .onlyDependOnClassesThat()
+                .resideInAnyPackage("..common..", "java..", "org..")
                 .check(classesFromLibraryExample);
     }
 

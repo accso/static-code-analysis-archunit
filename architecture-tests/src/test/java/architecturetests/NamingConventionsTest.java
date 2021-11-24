@@ -18,8 +18,10 @@ public class NamingConventionsTest {
     @Test
     void testImplementationsMustResideInPackageImpl() {
         ArchRuleDefinition.classes()
-                .that().haveSimpleNameEndingWith("Impl")
-                .should().resideInAPackage("..impl")
+                .that()
+                .haveSimpleNameEndingWith("Impl")
+                .should()
+                .resideInAPackage("..impl")
                 .check(classesFromLibraryExample);
     }
 }
