@@ -1,21 +1,19 @@
+package architecturetests;
+
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class NamingConventionsTest {
+public class DaosAreJpaRepositoriesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
-    @Test
-    void testImplementationsMustResideInPackageImpl() {
-        ArchRuleDefinition.classes()
-                .that().haveSimpleNameEndingWith("Impl")
-                .should().resideInAPackage("..impl")
-                .check(classesFromLibraryExample);
-    }
+    /**
+     * Beispiel 4 a und b
+     */
 
     @Test
     void teste_dass_jeder_Dao_ein_JpaRepository_ist_und_nur_diese() {
@@ -28,32 +26,4 @@ public class NamingConventionsTest {
                 .should().beAssignableTo(JpaRepository.class)
                 .check(classesFromLibraryExample);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ----------------------------------------------------------------------------------------------------------
-
-
-
-    void testImplementationsMustResideInPackageImpl_() {
-        ArchRuleDefinition.classes()
-                .that().haveSimpleNameEndingWith("Impl")
-                .should().resideInAPackage("..impl")
-                .check(classesFromLibraryExample);
-    }
-
-
 }
