@@ -10,13 +10,13 @@ import javax.persistence.Entity;
 class ArchitectureTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
-    private static JavaClasses classes = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
+    private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     @Test
     void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
         ArchRuleDefinition.classes().that().resideInAPackage("..common..")
                 .should().onlyDependOnClassesThat().resideInAnyPackage("..common..", "java..", "org..")
-                 .check(classes);
+                 .check(classesFromLibraryExample);
     }
 
     /**
@@ -36,7 +36,7 @@ class ArchitectureTest {
 
        ArchRule freezeRule = FreezingArchRule.freeze(
               annotationRule);
-       freezeRule.check(classes);
+       freezeRule.check(classesFromLibraryExample);
 
        // Check der gleichen Annotations-Regel, aber ohne Freeze
        // annotationRule.check(classes);
@@ -51,7 +51,7 @@ class ArchitectureTest {
                 .onlyDependOnClassesThat()
                 .resideInAnyPackage("java..") ;
 
-        dependRule.check(classes);
+        dependRule.check(classesFromLibraryExample);
     }
 
     @Test
@@ -62,6 +62,6 @@ class ArchitectureTest {
                 .onlyDependOnClassesThat()
                 .resideInAnyPackage("java..", "javax..",
                         "..model..", "org.apache.commons.lang3..")
-                .check(classes);
+                .check(classesFromLibraryExample);
     }
 }

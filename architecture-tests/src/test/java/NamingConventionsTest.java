@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public class NamingConventionsTest {
 
-    private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages("de.accso.library");
+    private static final String PACKAGE_PREFIX = "de.accso.library";
+    private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     @Test
     void testImplementationsMustResideInPackageImpl() {
