@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DaosAreJpaRepositories {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
-    private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
      * Example 4a and 4b, now retrieving classes from the ClassFileImporter and checking its results manually
@@ -24,9 +23,8 @@ class DaosAreJpaRepositories {
                 new DescribedPredicate<>("class implements JpaRepository") {
                     @Override
                     public boolean apply(JavaClass clazz) {
-                        return clazz.isAssignableTo(JpaRepository.class);
-                        // or:
                         // return (JpaRepository.class.isAssignableFrom(clazz.reflect()));
+                        return clazz.isAssignableTo(JpaRepository.class);
                     }
                 };
 
