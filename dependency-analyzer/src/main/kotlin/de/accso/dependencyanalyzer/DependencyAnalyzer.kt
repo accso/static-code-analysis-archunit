@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: String,
                          private val analyzeTestCode: Boolean = false) {
 
-    private val allJavaClazzesToAnalyze: JavaClasses
+    val allJavaClazzesToAnalyze: JavaClasses
     private val allKClazzesToAnalyze: Set<KClass<*>>
 
     init {
@@ -52,7 +52,6 @@ class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: St
         clazzesTransitivelyDependentOn(targetKClazzes, listOf(filterForPackage))
 
 
-//TODO change return type from Set<KClass<*>> to DependencyChain
     fun clazzesTransitivelyDependentOn(targetKClazzes: List<KClass<*>>, filterForPackages: List<String> = emptyList()): Set<KClass<*>> {
         val targetKClazzesAndItSealedSubclazzes = targetKClazzes.map { it.clazzAndItsSealedSubClazzes() }.flatten()
 
@@ -65,15 +64,55 @@ class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: St
         val dependentClazzesFromBackwardAnalysisViaArchUnitDependencyGraph =
                 backwardAnalysis.backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraph(
                         targetKClazzesAndItSealedSubclazzes)
-        val dependentClazzesFromForwardAnalysisViaKotlinReflectionConstructors =
-                forwardAnalysis.forwardAnalysisToFindTransitivelyDependentKClazzesViaConstructors(
-                        targetKClazzesAndItSealedSubclazzes)
+// TODO deactivated for now as breaks talk examples
+//        val dependentClazzesFromForwardAnalysisViaKotlinReflectionConstructors = emptySet<DependencyChainForKClazz>()
+//                forwardAnalysis.forwardAnalysisToFindTransitivelyDependentKClazzesViaConstructors(
+//                        targetKClazzesAndItSealedSubclazzes)
 
-//TODO change to DependencyChain, not only from
-        return (  (dependentClazzesFromBackwardAnalysisViaArchUnitDependencyGraph   .map { it.from.toKClazz() })
-                + (dependentClazzesFromForwardAnalysisViaKotlinReflectionConstructors.map { it.from }))
+        return (   (dependentClazzesFromBackwardAnalysisViaArchUnitDependencyGraph    .map { it.from })
+// TODO deactivated for now
+//               + (dependentClazzesFromForwardAnalysisViaKotlinReflectionConstructors.map { it.from })
+            )
             .filter { kClazz -> !targetKClazzes.contains(kClazz) } // filter out self
             .filter { kClazz -> (filterForPackages.isEmpty() || kClazz.residesInAnyPackage(filterForPackages)) } // filter only for relevant packages
             .toSet()
     }
+
+    // ------------------------------------------------------------------------------------------------------------
+
+    fun dependencyChainsOn(targetKClazz: KClass<*>, filterForPackage: String) =
+        dependencyChainsOn(listOf(targetKClazz), listOf(filterForPackage))
+
+    fun dependencyChainsOn(targetKClazz: KClass<*>, filterForPackages: List<String> = emptyList()) =
+        dependencyChainsOn(listOf(targetKClazz), filterForPackages)
+
+    fun dependencyChainsOn(targetKClazzes: List<KClass<*>>, filterForPackage: String) =
+        dependencyChainsOn(targetKClazzes, listOf(filterForPackage))
+
+    fun dependencyChainsOn(targetKClazzes: List<KClass<*>>, filterForPackages: List<String> = emptyList()): Set<DependencyChainForKClazz> {
+        val targetKClazzesAndItSealedSubclazzes = targetKClazzes.map { it.clazzAndItsSealedSubClazzes() }.flatten()
+
+        val backwardAnalysis = DependencyAnalyzerBackwardAnalysisViaArchUnitDependencyGraph(
+                analyzeDependenciesOnPackagesWithPrefix, allJavaClazzesToAnalyze)
+//TODO make optional, with some flag "deep analysis yes/no"
+        val forwardAnalysis  = DependencyAnalyzerForwardAnalysisViaKotlinReflectionConstructors(
+                allKClazzesToAnalyze)
+
+        val dependentClazzesFromBackwardAnalysisViaArchUnitDependencyGraph =
+                backwardAnalysis.backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraph(
+                        targetKClazzesAndItSealedSubclazzes)
+// TODO deactivated for now as breaks talk examples
+//        val dependentClazzesFromForwardAnalysisViaKotlinReflectionConstructors = emptySet<DependencyChainForKClazz>()
+//                forwardAnalysis.forwardAnalysisToFindTransitivelyDependentKClazzesViaConstructors(
+//                        targetKClazzesAndItSealedSubclazzes)
+
+        return  (   (dependentClazzesFromBackwardAnalysisViaArchUnitDependencyGraph)
+// TODO deactivated for now
+//                + (dependentClazzesFromForwardAnalysisViaKotlinReflectionConstructors)
+                )
+                .filter { kClazz -> !targetKClazzes.contains(kClazz.from) } // filter out self
+                .filter { kClazz -> (filterForPackages.isEmpty() || kClazz.from.residesInAnyPackage(filterForPackages)) } // filter only for relevant packages
+                .toSet()
+    }
+
 }

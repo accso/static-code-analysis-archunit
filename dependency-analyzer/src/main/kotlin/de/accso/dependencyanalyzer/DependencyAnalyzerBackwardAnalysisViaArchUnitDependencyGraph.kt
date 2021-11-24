@@ -13,8 +13,9 @@ class DependencyAnalyzerBackwardAnalysisViaArchUnitDependencyGraph(
         private val allJavaClazzesToAnalyze: JavaClasses) {
 
     fun backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraph(
-        toKClazzes: List<KClass<*>>): Set<DependencyChainForJavaClass> {
-        val dependentKClazzes = mutableSetOf<DependencyChainForJavaClass>()
+        toKClazzes: List<KClass<*>>): Set<DependencyChainForKClazz>
+    {
+        val dependentKClazzes = mutableSetOf<DependencyChainForKClazz>()
 
         toKClazzes.forEach { targetKClazz ->
             val targetJavaClazz = allJavaClazzesToAnalyze.singleOrNull { it.isEqualToKClazz(targetKClazz) }
@@ -24,9 +25,12 @@ class DependencyAnalyzerBackwardAnalysisViaArchUnitDependencyGraph(
             else
 //TODO how to beautify this, how to avoid the mutable collection?
                 dependentKClazzes.addAll(
-                    backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraphRecursion(targetJavaClazz)
-                        .map { DependencyChainForJavaClass(it.originClass, emptyList() /* TODO */, targetJavaClazz) } //TODO fill chain to list
-                        .toSet()
+                    backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraphRecursion(
+                            targetJavaClazz,
+                            targetJavaClazz,
+                            null
+                    )
+                    .toSet()
                 )
         }
 
@@ -35,24 +39,48 @@ class DependencyAnalyzerBackwardAnalysisViaArchUnitDependencyGraph(
 
     private fun backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraphRecursion(
         toJavaClazz: JavaClass,
-        alreadyAnalyzedJavaClazzes: MutableSet<JavaClass> = mutableSetOf()): Set<Dependency> {
-        val dependencies = mutableSetOf<Dependency>()
+        toTargetJavaClazz: JavaClass,
+        lastDependencyChain: DependencyChainForKClazz?,
+        alreadyAnalyzedJavaClazzes: MutableSet<JavaClass> = mutableSetOf()): Set<DependencyChainForKClazz>
+    {
+        val dependencies = mutableSetOf<DependencyChainForKClazz>()
 
         val clazzesToCheckInRecursion = mutableSetOf<JavaClass>()
         val mutableAnalyzedJavaClazzes = alreadyAnalyzedJavaClazzes.plus(toJavaClazz).toMutableSet()
 
         toJavaClazz.directDependenciesToSelf.forEach { dependency ->
 //TODO how to beautify this, how to avoid the mutable collection?
-            dependencies += dependency
+            dependencies += if (lastDependencyChain == null) {
+                DependencyChainForKClazz(dependency.originClass.toKClazz(), emptyList(), toTargetJavaClazz.toKClazz())
+            }
+            else {
+                DependencyChainForKClazz(dependency.originClass.toKClazz(),
+                        listOf(lastDependencyChain.from) + lastDependencyChain.dependencies,
+                                     lastDependencyChain.to
+                )
+            }
             clazzesToCheckInRecursion.add(dependency.originClass)
         }
 
         clazzesToCheckInRecursion.forEach { nextTargetJavaClazz ->
             if (!mutableAnalyzedJavaClazzes.alreadyAnalyzed(nextTargetJavaClazz)) {
+                val lastDependencyChainForRecursion = if (lastDependencyChain == null) {
+                    DependencyChainForKClazz(nextTargetJavaClazz.toKClazz(), emptyList(), toTargetJavaClazz.toKClazz())
+                }
+                else {
+                    DependencyChainForKClazz(nextTargetJavaClazz.toKClazz(),
+                            listOf(lastDependencyChain.from) + lastDependencyChain.dependencies,
+                            lastDependencyChain.to
+                    )
+                }
+
 //TODO how to beautify this, how to avoid the mutable collection?
                 dependencies +=
-                    backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraphRecursion(nextTargetJavaClazz,
-                                                                                mutableAnalyzedJavaClazzes) // recursion
+                    backwardAnalysisToFindTransitivelyDependentJavaClazzesViaDependencyGraphRecursion( // recursion
+                            nextTargetJavaClazz,
+                            toTargetJavaClazz,
+                            lastDependencyChainForRecursion,
+                            mutableAnalyzedJavaClazzes)
                 mutableAnalyzedJavaClazzes.add(nextTargetJavaClazz)
             }
         }

@@ -34,7 +34,7 @@ class DependencyAnalyzerForwardAnalysisViaKotlinReflectionConstructors(
         allKClazzesToAnalyze.forEach { fromKClazz ->
             if (fromKClazz.usesAsArgumentInConstructor(toKClazz)) {
 //TODO how to beautify this, how to avoid the mutable collection?
-                dependentKClazzes += DependencyChain(fromKClazz, emptyList() /* TODO */, toKClazz)     //TODO  fill chain to list
+                dependentKClazzes += DependencyChainForKClazz(fromKClazz, emptyList() /* TODO */, toKClazz)     //TODO  fill chain to list
                 clazzesToCheckInRecursion.add(fromKClazz)
             }
         }

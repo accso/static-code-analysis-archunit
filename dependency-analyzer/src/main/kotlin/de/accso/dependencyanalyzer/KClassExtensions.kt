@@ -1,6 +1,8 @@
 package de.accso.dependencyanalyzer
 
 import com.tngtech.archunit.base.PackageMatcher
+import com.tngtech.archunit.core.domain.JavaClass
+import com.tngtech.archunit.core.domain.JavaClasses
 import kotlin.reflect.KClass
 import kotlin.reflect.jvm.javaType
 
@@ -73,3 +75,5 @@ fun KClass<*>.throwExceptionBecauseJavaClazzNotFoundForKClazz(analyzeDependencie
         )
     }
 }
+
+fun KClass<*>.toJavaClazz(allJavaClasses: JavaClasses): JavaClass? = allJavaClasses.firstOrNull { it.isEqualToKClazz(this) }
