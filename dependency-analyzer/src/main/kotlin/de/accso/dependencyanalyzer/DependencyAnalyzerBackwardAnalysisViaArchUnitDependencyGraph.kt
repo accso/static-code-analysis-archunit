@@ -28,8 +28,7 @@ class DependencyAnalyzerBackwardAnalysisViaArchUnitDependencyGraph(
                             targetJavaClazz,
                             targetJavaClazz,
                             null
-                    )
-                    .toSet()
+                    ).toSet()
                 )
         }
 

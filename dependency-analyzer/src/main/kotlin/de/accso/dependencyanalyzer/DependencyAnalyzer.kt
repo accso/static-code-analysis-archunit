@@ -48,10 +48,6 @@ class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: St
     fun clazzesTransitivelyDependentOn(targetKClazz: KClass<*>, filterForPackages: List<String> = emptyList()) =
         clazzesTransitivelyDependentOn(listOf(targetKClazz), filterForPackages)
 
-    fun clazzesTransitivelyDependentOn(targetKClazzes: List<KClass<*>>, filterForPackage: String) =
-        clazzesTransitivelyDependentOn(targetKClazzes, listOf(filterForPackage))
-
-
     fun clazzesTransitivelyDependentOn(targetKClazzes: List<KClass<*>>, filterForPackages: List<String> = emptyList()): Set<KClass<*>> {
         val targetKClazzesAndItSealedSubclazzes = targetKClazzes.map { it.clazzAndItsSealedSubClazzes() }.flatten()
 

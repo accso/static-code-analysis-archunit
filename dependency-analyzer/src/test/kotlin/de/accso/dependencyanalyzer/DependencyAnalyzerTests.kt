@@ -53,7 +53,7 @@ class DependencyAnalyzerTests {
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage1.TargetUsedInMultipleFilesInDomain::class
 
         // act
-        val dependentClazzes = sut.clazzesTransitivelyDependentOn(listOf(targetKClazz), listOf(DOMAIN_WILDCARD))
+        val dependentClazzes = sut.clazzesTransitivelyDependentOn(targetKClazz, listOf(DOMAIN_WILDCARD))
         // dependentClazzes.forEach{ println(it.qualifiedName) }
 
         // assert
@@ -77,7 +77,7 @@ class DependencyAnalyzerTests {
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage1.TargetUsedFromMultipleFilesInAPI::class
 
         // act
-        val dependentClazzes = sut.clazzesTransitivelyDependentOn(listOf(targetKClazz),
+        val dependentClazzes = sut.clazzesTransitivelyDependentOn(targetKClazz,
                 listOf(de.accso.dependencyanalyzer.testset.testpackage1.api.Top1::class.java.packageName)
         )
         // dependentClazzes.forEach{ println(it.qualifiedName) }
@@ -108,7 +108,7 @@ class DependencyAnalyzerTests {
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage1.TargetUsedFromMultipleFilesInAPI::class
 
         // act
-        val dependentClazzes = sut.clazzesTransitivelyDependentOn(listOf(targetKClazz),
+        val dependentClazzes = sut.clazzesTransitivelyDependentOn(targetKClazz,
                 listOf(nonExistingPackage))
         // dependentClazzes.forEach{ println(it.qualifiedName) }
 
@@ -128,7 +128,7 @@ class DependencyAnalyzerTests {
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage1.TargetUsedFromMultipleFilesInAPI::class
 
         // act
-        val dependentClazzes = sut.clazzesTransitivelyDependentOn(listOf(targetKClazz),
+        val dependentClazzes = sut.clazzesTransitivelyDependentOn(targetKClazz,
                 listOf(filterForPackage))
         // dependentClazzes.forEach{ println(it.qualifiedName) }
 

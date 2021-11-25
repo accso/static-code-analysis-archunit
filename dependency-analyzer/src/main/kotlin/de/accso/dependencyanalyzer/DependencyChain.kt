@@ -9,6 +9,6 @@ data class DependencyChain(val from: KClass<*>, val dependencies: List<KClass<*>
         val dependenciesToString =
                 if(dependencies.isEmpty()) ""
                 else dependencies.joinToString(" -> ", " -> ") { it.qualifiedName.toString() }
-        return "${from.qualifiedName} " + dependenciesToString + " -> ${to?.qualifiedName}"
+        return "${from.qualifiedName}" + dependenciesToString + " -> ${to?.qualifiedName}"
     }
 }
