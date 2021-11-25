@@ -186,9 +186,8 @@ class DependencyAnalyzerTests {
                 de.accso.dependencyanalyzer.testset.testpackage2.Middle::class,
             )
         )
-//TODO currently broken but why? forward is deactivated, is that the problem?
         assertThat(dependentClazzes.map { it.qualifiedName }).contains(
-            "de.accso.dependencyanalyzer.testset.testpackage2.TargetIsUsedAlsoInVariableKt"
+            "de.accso.dependencyanalyzer.testset.testpackage2.TargetUsedAlsoInVariableKt"
         )
     }
 
@@ -256,7 +255,6 @@ class DependencyAnalyzerTests {
         )
     }
 
-//TODO why is this test green? forwardAnalysis is deactivated. Is the update to a new ArchUnit version the reason?
     @Test
     fun `findet transitiv alle eingehenden Abhaengigkeiten auch ueber den Generic Type in einer Collection`() {
         // arrange
@@ -460,22 +458,22 @@ class DependencyAnalyzerTests {
         // assert
         assertThat(dependencyChainsOn).isEqualTo(
                 setOf(
-                        DependencyChainForKClazz(Middle1::class,
+                        DependencyChain(Middle1::class,
                                 emptyList(),
                                 targetKClazz),
-                        DependencyChainForKClazz(Middle2::class,
+                        DependencyChain(Middle2::class,
                                 emptyList(),
                                 targetKClazz),
-                        DependencyChainForKClazz(Top1::class,
+                        DependencyChain(Top1::class,
                                 listOf(Middle1::class),
                                 targetKClazz),
-                        DependencyChainForKClazz(Top1::class,
+                        DependencyChain(Top1::class,
                                 listOf(Middle2::class),
                                 targetKClazz),
-                        DependencyChainForKClazz(Top2::class,
+                        DependencyChain(Top2::class,
                                 listOf(Middle1::class),
                                 targetKClazz),
-                        DependencyChainForKClazz(Top2::class,
+                        DependencyChain(Top2::class,
                                 listOf(Middle2::class),
                                 targetKClazz),
                 )

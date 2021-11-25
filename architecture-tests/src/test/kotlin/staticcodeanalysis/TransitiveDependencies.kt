@@ -1,6 +1,5 @@
 package staticcodeanalysis
 
-import com.tngtech.archunit.core.domain.JavaClass
 import de.accso.dependencyanalyzer.*
 import de.accso.library.datamanagement.manager.BookDao
 import de.accso.library.datamanagement.model.Customer
@@ -48,19 +47,19 @@ class TransitiveDependencies {
         // assert
         Assertions.assertThat(dependencyChainsOn).isEqualTo(
                 setOf(
-                        DependencyChainForKClazz(
+                        DependencyChain(
                                 BookDao::class,
                                 emptyList(),
                                 bookClazz),
-                        DependencyChainForKClazz(
+                        DependencyChain(
                                 MediaType::class,
                                 emptyList(),
                                 bookClazz),
-                        DependencyChainForKClazz(
+                        DependencyChain(
                                 CustomerAccounting::class,
                                 listOf(MediaType::class),
                                 bookClazz),
-                        DependencyChainForKClazz(
+                        DependencyChain(
                                 Customer::class,
                                 listOf(CustomerAccounting::class, MediaType::class),
                                 bookClazz)
