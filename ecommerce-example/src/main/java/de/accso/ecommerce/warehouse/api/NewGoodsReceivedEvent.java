@@ -1,4 +1,6 @@
 package de.accso.ecommerce.warehouse.api;
 
-public class NewGoodsReceivedEvent {
+import de.accso.ecommerce.common.Event;
+
+public class NewGoodsReceivedEvent implements Event {
 }

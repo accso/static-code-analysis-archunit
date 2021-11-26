@@ -1,4 +1,6 @@
 package de.accso.ecommerce.shipping.api;
 
-public class DeliveryRetourEvent {
+import de.accso.ecommerce.common.Event;
+
+public class DeliveryRetourEvent implements Event {
 }

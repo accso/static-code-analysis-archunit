@@ -1,4 +1,6 @@
 package de.accso.ecommerce.shipping.api;
 
-public class DeliverySentOutEvent {
+import de.accso.ecommerce.common.Event;
+
+public class DeliverySentOutEvent implements Event {
 }
