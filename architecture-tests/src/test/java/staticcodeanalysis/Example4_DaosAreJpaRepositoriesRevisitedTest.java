@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DaosAreJpaRepositoriesRevisitedTest {
+class Example4_DaosAreJpaRepositoriesRevisitedTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
 

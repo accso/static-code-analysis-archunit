@@ -7,7 +7,7 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class DependenciesTest {
+public class Example2_DependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
@@ -18,7 +18,7 @@ public class DependenciesTest {
 
     // test fails
     @Test
-    void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
+    void test_classes_in_common_must_not_use_other_classes_except_standard_classes() {
         ArchRuleDefinition.classes()
                 .that()
                 .resideInAPackage("..common..")
@@ -30,7 +30,7 @@ public class DependenciesTest {
 
     // test fails
     @Test
-    void testCorrectDependenciesOfLibraryModelClasses() {
+    void test_allowed_dependencies_of_model_classes() {
         ArchRuleDefinition.classes().that()
                 .resideInAPackage("..model..")
                 .should()

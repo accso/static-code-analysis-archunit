@@ -7,13 +7,13 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Test;
 
-public class TestsUsingFreezeAndIgnore {
+public class Example7_TestsUsingFreezeAndIgnore {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 7 - library example - test by ignoring some classes - see archunit_ignore_patterns.txt - works globally
+     * example 7a - library example - test by ignoring some classes - see globally active archunit_ignore_patterns.txt
      */
 
     @Test
@@ -27,7 +27,7 @@ public class TestsUsingFreezeAndIgnore {
     }
 
     /**
-     * example 8 - library example - freeze violations which should be ignored
+     * example 7b - library example - freeze violations which should be ignored
      */
     @Test
     void testImplementationsMustResideInPackageImplWithFreezing() {

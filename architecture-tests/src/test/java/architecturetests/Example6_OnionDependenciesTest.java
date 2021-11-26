@@ -21,7 +21,7 @@ class Component {
 }
 
 
-public class OnionDependenciesTest {
+public class Example6_OnionDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
