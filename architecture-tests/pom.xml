@@ -23,5 +23,11 @@
 			<version>0.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.accso</groupId>
+			<artifactId>ecommerce-example</artifactId>
+			<version>0.1</version>
+		</dependency>
+
 	</dependencies>
 </project>

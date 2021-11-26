@@ -38,6 +38,7 @@
 		<module>library-example</module>
 		<module>dependency-analyzer</module>
 		<module>architecture-tests</module>
+		<module>ecommerce-example</module>
 	</modules>
 
 	<dependencies>
