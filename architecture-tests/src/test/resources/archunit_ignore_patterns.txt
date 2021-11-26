@@ -1,2 +1,2 @@
-# ignore violations in
-# .*CustomerAccounting.*
+# ignore all violations in AuthorizationImpl
+# .*\.common\.security\.AuthorizationImpl.*
