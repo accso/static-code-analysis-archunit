@@ -1,11 +1,11 @@
 package staticcodeanalysis
 
-import de.accso.dependencyanalyzer.*
+import de.accso.dependencyanalyzer.DependencyAnalyzer
+import de.accso.dependencyanalyzer.DependencyChain
 import de.accso.library.datamanagement.manager.BookDao
 import de.accso.library.datamanagement.model.Customer
 import de.accso.library.datamanagement.model.CustomerAccounting
 import de.accso.library.datamanagement.model.MediaType
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

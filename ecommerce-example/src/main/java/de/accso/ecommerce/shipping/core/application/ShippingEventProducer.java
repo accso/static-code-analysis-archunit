@@ -1,7 +1,9 @@
 package de.accso.ecommerce.shipping.core.application;
 
-import de.accso.ecommerce.shipping.api.*;
-import de.accso.ecommerce.warehouse.core.application.WarehouseMessaging;
+import de.accso.ecommerce.shipping.api.DeliveryDeliveredEvent;
+import de.accso.ecommerce.shipping.api.DeliveryPreparedEvent;
+import de.accso.ecommerce.shipping.api.DeliveryRetourEvent;
+import de.accso.ecommerce.shipping.api.DeliverySentOutEvent;
 
 import java.util.ArrayList;
 import java.util.List;

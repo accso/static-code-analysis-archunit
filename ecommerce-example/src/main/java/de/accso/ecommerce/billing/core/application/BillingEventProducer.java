@@ -1,6 +1,7 @@
 package de.accso.ecommerce.billing.core.application;
 
-import de.accso.ecommerce.billing.api.*;
+import de.accso.ecommerce.billing.api.BillCreatedEvent;
+import de.accso.ecommerce.billing.api.PaymentDoneEvent;
 
 import java.util.ArrayList;
 import java.util.List;

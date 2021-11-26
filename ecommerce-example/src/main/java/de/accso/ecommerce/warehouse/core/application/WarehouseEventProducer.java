@@ -1,6 +1,7 @@
 package de.accso.ecommerce.warehouse.core.application;
 
-import de.accso.ecommerce.warehouse.api.*;
+import de.accso.ecommerce.warehouse.api.NewGoodsReceivedEvent;
+import de.accso.ecommerce.warehouse.api.ProductRunsOutOfStockEvent;
 
 import java.util.ArrayList;
 import java.util.List;
