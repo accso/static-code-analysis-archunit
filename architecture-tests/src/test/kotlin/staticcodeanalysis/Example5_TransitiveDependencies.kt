@@ -29,19 +29,21 @@ class Example5_TransitiveDependencies {
         // dependentClazzes.forEach{ println(it.qualifiedName) }
 
         // assert
-        assertThat(dependentClazzes).isEqualTo(
-                setOf(
+        assertThat(dependentClazzes)
+                .describedAs("fixed set of transitive dependencies to class Book in datamanagement")
+        .isEqualTo(setOf(
                     de.accso.library.datamanagement.manager.BookDao::class,
                     de.accso.library.datamanagement.model.MediaType::class,
                     de.accso.library.datamanagement.model.CustomerAccounting::class,
                     de.accso.library.datamanagement.model.Customer::class
                 )
+
         )
     }
 
     // test does not fail
     @Test
-    fun `find all transitive dependencies chains to class Book in datamanagement`() {
+    fun `find all transitive dependency chains to class Book in datamanagement`() {
         // arrange
         val dependencyAnalyzer = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 
@@ -52,12 +54,14 @@ class Example5_TransitiveDependencies {
         dependencyChainsOn.forEach{ println(it) }
 
         // assert
-        assertThat(dependencyChainsOn).isEqualTo(
+        assertThat(dependencyChainsOn)
+                .describedAs("fixed set of transitive dependency chains to class Book in datamanagement")
+        .isEqualTo(
                 setOf(
-                    DependencyChain( BookDao::class, emptyList(), bookClazz),
-                    DependencyChain( MediaType::class, emptyList(), bookClazz),
-                    DependencyChain( CustomerAccounting::class, listOf(MediaType::class), bookClazz),
-                    DependencyChain( Customer::class, listOf(CustomerAccounting::class, MediaType::class), bookClazz)
+                    DependencyChain(BookDao::class, emptyList(), bookClazz),
+                    DependencyChain(MediaType::class, emptyList(), bookClazz),
+                    DependencyChain(CustomerAccounting::class, listOf(MediaType::class), bookClazz),
+                    DependencyChain(Customer::class, listOf(CustomerAccounting::class, MediaType::class), bookClazz)
                 )
         )
     }

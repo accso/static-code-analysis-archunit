@@ -46,6 +46,7 @@ class Example4_DaosAreJpaRepositoriesRevisitedTest {
 
         // assert
         assertThat(allJpaRepositoryClasses)
+                .describedAs("all JpaRepositories and all Daos are exactly the same classes")
                 .isEqualTo(allDaoClasses);
     }
 }

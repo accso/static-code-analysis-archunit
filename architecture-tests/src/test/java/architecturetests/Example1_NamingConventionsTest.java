@@ -2,7 +2,9 @@ package architecturetests;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import com.tngtech.archunit.lang.syntax.elements.ClassesShouldConjunction;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,12 +20,14 @@ public class Example1_NamingConventionsTest {
     // test fails as AuthorizationImpl is not in an impl package
     @Test
     void test_implementation_classes_must_reside_in_a_packaged_named_impl() {
-        // arrange, act, assert
-        ArchRuleDefinition.classes()
+        // arrange
+        ArchRule rule = ArchRuleDefinition.classes()
                 .that()
                 .haveSimpleNameEndingWith("Impl")
                 .should()
-                .resideInAPackage("..impl")
-                .check(classesFromLibraryExample);
+                .resideInAPackage("..impl");
+
+        // act, assert
+        rule.check(classesFromLibraryExample);
     }
 }
