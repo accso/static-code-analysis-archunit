@@ -30,7 +30,7 @@ public class Example7_TestsUsingFreezeAndIgnore {
      * example 7b - library example - freeze violations which should be ignored
      */
     @Test
-    void testImplementationsMustResideInPackageImplWithFreezing() {
+    void test_implementation_classes_must_reside_in_a_package_named_impl_with_freezing() {
 //        FreezingArchRule.freeze(
                 ArchRuleDefinition.classes()
                         .that()

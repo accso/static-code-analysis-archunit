@@ -19,6 +19,7 @@ public class Example2_DependenciesTest {
     // test fails
     @Test
     void test_classes_in_common_must_not_use_other_classes_except_standard_classes() {
+        // arrange, act, assert
         ArchRuleDefinition.classes()
                 .that()
                 .resideInAPackage("..common..")
@@ -31,6 +32,7 @@ public class Example2_DependenciesTest {
     // test fails
     @Test
     void test_allowed_dependencies_of_model_classes() {
+        // arrange, act, assert
         ArchRuleDefinition.classes().that()
                 .resideInAPackage("..model..")
                 .should()

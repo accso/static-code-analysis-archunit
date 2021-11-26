@@ -17,6 +17,7 @@ public class Example3_CycleTest {
     // test fails with two cycles
     @Test
     void test_first_level_packages_must_be_free_of_cycles() {
+        // arrange, act, assert
         SlicesRuleDefinition.slices()
                 .matching("de.accso.library.(*)..")
                 .should()
@@ -27,11 +28,11 @@ public class Example3_CycleTest {
     // test fails with several cycles
     @Test
     void test_all_packages_must_be_free_of_cycles() {
+        // arrange, act, assert
         SlicesRuleDefinition.slices()
                 .matching("de.accso.library.(**)..")
                 .should()
                 .beFreeOfCycles()
                 .check(classesFromLibraryExample);
     }
-
 }

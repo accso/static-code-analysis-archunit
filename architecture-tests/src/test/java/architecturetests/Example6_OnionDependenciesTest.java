@@ -32,6 +32,7 @@ public class Example6_OnionDependenciesTest {
 
     @Test
     void test_slices_are_free_of_cycles() {
+        // arrange, act, assert
         SlicesRuleDefinition.slices()
                 .matching(PACKAGE_PREFIX + ".(*)..")
                 .should()
@@ -41,12 +42,14 @@ public class Example6_OnionDependenciesTest {
 
     @Test
     void test_component_have_defined_dependencies() {
+        // arrange
         Component billing = new Component("..billing..");
         Component common = new Component("..common..");
         Component sales = new Component("..sales..");
         Component shipping = new Component("..shipping..");
         Component warehouse = new Component("..warehouse..");
 
+        // act, assert
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(billing.name)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(billing.name, common.name, shipping.name, "java..")
@@ -71,6 +74,7 @@ public class Example6_OnionDependenciesTest {
 
     @Test
     void test_onion_architecture_inside_one_component_using_layers() {
+        // arrange
         Layer apiLayer = new Layer("API", "..api..");
         Layer applicationLayer = new Layer("Application", "..application..");
         Layer domainLayer = new Layer("Domain", "..domain..");
@@ -85,6 +89,7 @@ public class Example6_OnionDependenciesTest {
                 .layer(infrastructureLayer.name).definedBy(infrastructureLayer.pkg)
                 .layer(uiLayer.name).definedBy(uiLayer.pkg);
 
+        // act, assert
         layeredArchitecture
                 .whereLayer(apiLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 .whereLayer(domainLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
@@ -95,6 +100,7 @@ public class Example6_OnionDependenciesTest {
 
     @Test
     void test_onion_architecture_inside_one_component_using_onion() {
+        // arrange, act, assert
         onionArchitecture()
                 .withOptionalLayers(true)
                 .domainModels(PACKAGE_PREFIX + ".core.domain.model..")

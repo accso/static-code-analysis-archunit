@@ -14,7 +14,7 @@ class Example5_TransitiveDependencies {
     /**
      * example 5 - library example - Kotlin - get transitive dependencies and dependency chains
      */
-    val TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED = "de.accso.library"
+    private val TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED = "de.accso.library"
 
     // test does not fail
     @Test
