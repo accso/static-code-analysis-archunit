@@ -13,9 +13,10 @@ public class DependenciesTest {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * Beispiel 2
+     * example 2 - library example - check dependencies on the library example
      */
 
+    // test fails
     @Test
     void testClassesInCommonMustNotUseOtherClassesExceptStandardClasses() {
         ArchRuleDefinition.classes()
@@ -27,21 +28,9 @@ public class DependenciesTest {
                 .check(classesFromLibraryExample);
     }
 
-    @Test
-    void testThatLibraryUtilClassesDependOnlyContainJavaStandardClasses() {
-
-        ArchRule dependRule = ArchRuleDefinition.classes()
-                .that().resideInAPackage("..util..")
-                .should()
-                .onlyDependOnClassesThat()
-                .resideInAnyPackage("java..") ;
-
-        dependRule.check(classesFromLibraryExample);
-    }
-
+    // test fails
     @Test
     void testCorrectDependenciesOfLibraryModelClasses() {
-
         ArchRuleDefinition.classes().that()
                 .resideInAPackage("..model..")
                 .should()

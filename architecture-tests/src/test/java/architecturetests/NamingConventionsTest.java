@@ -12,11 +12,12 @@ public class NamingConventionsTest {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * Beispiel 1
+     * example 3 - library example - test naming conventions on "impl" classes
      */
 
+    // test fails as AuthorizationImpl is not in an impl package
     @Test
-    void testImplementationsMustResideInPackageImpl() {
+    void test_implementation_classes_must_reside_in_a_packaged_named_impl() {
         ArchRuleDefinition.classes()
                 .that()
                 .haveSimpleNameEndingWith("Impl")

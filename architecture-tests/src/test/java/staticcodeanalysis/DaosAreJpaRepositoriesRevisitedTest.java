@@ -14,9 +14,10 @@ class DaosAreJpaRepositoriesRevisitedTest {
     private static final String PACKAGE_PREFIX = "de.accso.library";
 
     /**
-     * Example 4a and 4b, now retrieving classes from the ClassFileImporter and checking its results manually
+     * example 4a and 4b revisited - library example - now retrieving classes from the ClassFileImporter and checking its results manually
      */
 
+    // static code analysis / test fails because 'EntityDao' is a super class and is not a JpaRepository
     @Test
     void test_that_all_JpaRepositories_and_all_Daos_are_exactly_the_same_classes() {
         DescribedPredicate<JavaClass> predicateClassImplementsJpaRepository =

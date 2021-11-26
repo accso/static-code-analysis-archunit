@@ -11,11 +11,12 @@ public class CycleTest {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * Beispiel 3
+     * example 3 - library example - check for cycles
      */
 
+    // test fails with two cycles
     @Test
-    void testFirstLevelPackagesMustBeFreeOfCycles() {
+    void test_first_level_packages_must_be_free_of_cycles() {
         SlicesRuleDefinition.slices()
                 .matching("de.accso.library.(*)..")
                 .should()
@@ -23,8 +24,9 @@ public class CycleTest {
                 .check(classesFromLibraryExample);
     }
 
+    // test fails with several cycles
     @Test
-    void testAllPackagesMustBeFreeOfCycles() {
+    void test_all_packages_must_be_free_of_cycles() {
         SlicesRuleDefinition.slices()
                 .matching("de.accso.library.(**)..")
                 .should()

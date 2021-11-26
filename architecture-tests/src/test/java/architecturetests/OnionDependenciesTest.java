@@ -27,7 +27,7 @@ public class OnionDependenciesTest {
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 6 - testing dependencies of the eCommerce example - layer, onion, components
+     * example 6 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
      */
 
     @Test
@@ -57,7 +57,7 @@ public class OnionDependenciesTest {
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(sales.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(sales.name,common.name, "java..")
+                .should().onlyDependOnClassesThat().resideInAnyPackage(sales.name, common.name, "java..")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(shipping.name)

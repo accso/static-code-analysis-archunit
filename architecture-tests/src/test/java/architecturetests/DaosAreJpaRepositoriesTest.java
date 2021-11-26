@@ -12,11 +12,12 @@ public class DaosAreJpaRepositoriesTest {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * Beispiel 4 a und b
+     * example 4a and 4b - library example - test that all Daos are JpaRepositories (and vice versa)
      */
 
+    // test fails because 'EntityDao' is a super class and is not a JpaRepository
     @Test
-    void teste_dass_jeder_Dao_ein_JpaRepository_ist_und_nur_diese() {
+    void test_each_daos_is_a_jparepository_and_only_the_daos() {
         ArchRuleDefinition.classes()
                 .that().areAssignableTo(JpaRepository.class)
                 .should().haveSimpleNameEndingWith("Dao")

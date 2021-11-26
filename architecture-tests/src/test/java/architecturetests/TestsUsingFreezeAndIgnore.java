@@ -13,11 +13,11 @@ public class TestsUsingFreezeAndIgnore {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * Beispiel 7 ignore
+     * example 7 - library example - test by ignoring some classes - see archunit_ignore_patterns.txt - works globally
      */
 
     @Test
-    void testImplementationsMustResideInPackageImplIgnoreAuthorization() {
+    void test_implementation_classes_must_reside_in_a_packaged_named_impl_ignore_authorization() {
         ArchRuleDefinition.classes()
                 .that()
                 .haveSimpleNameEndingWith("Impl")
@@ -27,18 +27,17 @@ public class TestsUsingFreezeAndIgnore {
     }
 
     /**
-     * Beispiel 8 freeze
+     * example 8 - library example - freeze violations which should be ignored
      */
     @Test
-    void testImplementationsMustResideInPackageImplWithFreezing(){
-
-        FreezingArchRule.freeze(
+    void testImplementationsMustResideInPackageImplWithFreezing() {
+//        FreezingArchRule.freeze(
                 ArchRuleDefinition.classes()
                         .that()
                         .haveSimpleNameEndingWith("Impl")
                         .should()
                         .resideInAPackage("..impl")
-        )
-                .check(classesFromLibraryExample);
+//        )
+        .check(classesFromLibraryExample);
     }
 }
