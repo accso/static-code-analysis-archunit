@@ -22,12 +22,14 @@ public class Example4_DaosAreJpaRepositoriesTest {
         ArchRuleDefinition.classes()
                 .that().areAssignableTo(JpaRepository.class)
                 .should().haveSimpleNameEndingWith("Dao")
+                .because("each class which is a JpaRepository should be named *Dao")
                 .check(classesFromLibraryExample);
 
         // arrange, act, assert
         ArchRuleDefinition.classes()
                 .that().haveSimpleNameEndingWith("Dao")
                 .should().beAssignableTo(JpaRepository.class)
+                .because("each class which is named *Dao should implement JpaRepository")
                 .check(classesFromLibraryExample);
     }
 }

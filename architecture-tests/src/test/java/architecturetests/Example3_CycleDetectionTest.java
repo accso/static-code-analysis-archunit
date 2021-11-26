@@ -22,6 +22,7 @@ public class Example3_CycleDetectionTest {
                 .matching("de.accso.library.(*)..")
                 .should()
                 .beFreeOfCycles()
+                .because("cycles are bad")
                 .check(classesFromLibraryExample);
     }
 
@@ -33,6 +34,7 @@ public class Example3_CycleDetectionTest {
                 .matching("de.accso.library.(**)..")
                 .should()
                 .beFreeOfCycles()
+                .because("cycles are bad")
                 .check(classesFromLibraryExample);
     }
 }

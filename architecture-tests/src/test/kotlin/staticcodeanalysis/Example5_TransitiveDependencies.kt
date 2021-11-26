@@ -30,15 +30,13 @@ class Example5_TransitiveDependencies {
 
         // assert
         assertThat(dependentClazzes)
-                .describedAs("fixed set of transitive dependencies to class Book in datamanagement")
-        .isEqualTo(setOf(
+                .describedAs("transitive dependencies to class Book in datamanagement is fixed")
+                .isEqualTo(setOf(
                     de.accso.library.datamanagement.manager.BookDao::class,
                     de.accso.library.datamanagement.model.MediaType::class,
                     de.accso.library.datamanagement.model.CustomerAccounting::class,
                     de.accso.library.datamanagement.model.Customer::class
-                )
-
-        )
+                ))
     }
 
     // test does not fail
@@ -55,14 +53,12 @@ class Example5_TransitiveDependencies {
 
         // assert
         assertThat(dependencyChainsOn)
-                .describedAs("fixed set of transitive dependency chains to class Book in datamanagement")
-        .isEqualTo(
-                setOf(
+                .describedAs("transitive dependency chains to class Book in datamanagement is fixed")
+                .isEqualTo(setOf(
                     DependencyChain(BookDao::class, emptyList(), bookClazz),
                     DependencyChain(MediaType::class, emptyList(), bookClazz),
                     DependencyChain(CustomerAccounting::class, listOf(MediaType::class), bookClazz),
                     DependencyChain(Customer::class, listOf(CustomerAccounting::class, MediaType::class), bookClazz)
-                )
-        )
+                ))
     }
 }

@@ -30,6 +30,7 @@ public class Example2_DependenciesTest {
                 .should()
                 .onlyDependOnClassesThat()
                 .resideInAnyPackage("..common..", "java..", "org..")
+                .because("we want to manage dependencies explicitely")
                 .check(classesFromLibraryExample);
     }
 
@@ -44,7 +45,9 @@ public class Example2_DependenciesTest {
                 .resideInAnyPackage("java..", "javax..", "..model..", "org.apache.commons.lang3..");
 
         // act
-        EvaluationResult evaluationResult = rule.evaluate(classesFromLibraryExample);
+        EvaluationResult evaluationResult = rule
+                .because("we want to manage model dependencies explicitely")
+                .evaluate(classesFromLibraryExample);
 
         // assert
         assertThat(evaluationResult.getFailureReport().getDetails())

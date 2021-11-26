@@ -28,6 +28,7 @@ public class Example1_NamingConventionsTest {
                 .resideInAPackage("..impl");
 
         // act, assert
-        rule.check(classesFromLibraryExample);
+        rule.because("we want to enforce naming conventions")
+            .check(classesFromLibraryExample);
     }
 }

@@ -37,6 +37,7 @@ public class Example6_OnionDependenciesTest {
                 .matching(PACKAGE_PREFIX + ".(*)..")
                 .should()
                 .beFreeOfCycles()
+                .because("cycles are bad")
                 .check(classesFromEcommerceExample);
     }
 
@@ -53,22 +54,27 @@ public class Example6_OnionDependenciesTest {
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(billing.name)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(billing.name, common.name, shipping.name, "java..")
-                .check(classesFromEcommerceExample);
-        ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(common.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(common.name, "java..")
+                .because("we want to manage dependencies from component billing explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(sales.name)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(sales.name, common.name, "java..")
+                .because("we want to manage dependencies from component sales explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(shipping.name)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(shipping.name, common.name, sales.name, "java..")
+                .because("we want to manage dependencies from component shipping explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(warehouse.name)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(warehouse.name, common.name, "java..")
+                .because("we want to manage dependencies from component warehouse explicitely")
+                .check(classesFromEcommerceExample);
+        ArchRuleDefinition.classes()
+                .that().resideInAnyPackage(common.name)
+                .should().onlyDependOnClassesThat().resideInAnyPackage(common.name, "java..")
+                .because("we want to manage dependencies from component common explicitely")
                 .check(classesFromEcommerceExample);
     }
 
@@ -95,6 +101,7 @@ public class Example6_OnionDependenciesTest {
                 .whereLayer(domainLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 .whereLayer(infrastructureLayer.name).mayNotBeAccessedByAnyLayer()
                 .whereLayer(uiLayer.name).mayNotBeAccessedByAnyLayer()
+                .because("we want to enforce the onion architecure inside each component")
                 .check(classesFromEcommerceExample);
     }
 
@@ -109,6 +116,7 @@ public class Example6_OnionDependenciesTest {
                 .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.persistence..")
                 .adapter("cli", PACKAGE_PREFIX + ".infrastructure.cli..")
                 .adapter("monitoring", PACKAGE_PREFIX + ".infrastructure.monitoring..")
+                .because("we want to enforce the onion architecure inside each component")
                 .check(classesFromEcommerceExample);
     }
 }
