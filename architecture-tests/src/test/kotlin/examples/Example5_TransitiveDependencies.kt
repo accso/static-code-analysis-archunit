@@ -1,4 +1,4 @@
-package staticcodeanalysis
+package examples
 
 import de.accso.dependencyanalyzer.DependencyAnalyzer
 import de.accso.dependencyanalyzer.DependencyChain
