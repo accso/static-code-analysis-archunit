@@ -17,24 +17,17 @@ public class Example3_CycleDetectionTest {
     // test fails with two cycles
     @Test
     void test_first_level_packages_must_be_free_of_cycles() {
-        // arrange, act, assert
-        SlicesRuleDefinition.slices()
-                .matching("de.accso.library.(*)..")
-                .should()
-                .beFreeOfCycles()
-                .because("cycles are bad")
-                .check(classesFromLibraryExample);
+
+        // TODO
+
     }
 
     // test fails with several cycles
     @Test
     void test_all_packages_must_be_free_of_cycles() {
-        // arrange, act, assert
-        SlicesRuleDefinition.slices()
-                .matching("de.accso.library.(**)..")
-                .should()
-                .beFreeOfCycles()
-                .because("cycles are bad")
-                .check(classesFromLibraryExample);
+
+        // TODO
+
+
     }
 }

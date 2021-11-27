@@ -20,33 +20,8 @@ class Example4_DaosAreJpaRepositoriesRevisitedTest {
     // static code analysis / test fails because 'EntityDao' is a super class and is not a JpaRepository
     @Test
     void test_that_all_JpaRepositories_and_all_Daos_are_exactly_the_same_classes() {
-        DescribedPredicate<JavaClass> predicateClassImplementsJpaRepository =
-                new DescribedPredicate<>("class implements JpaRepository") {
-                    @Override
-                    public boolean apply(JavaClass clazz) {
-                        // return (JpaRepository.class.isAssignableFrom(clazz.reflect()));
-                        return clazz.isAssignableTo(JpaRepository.class);
-                    }
-                };
 
-        DescribedPredicate<JavaClass> predicateClassIsADao =
-                new DescribedPredicate<>("class is a Dao") {
-                    @Override
-                    public boolean apply(JavaClass clazz) {
-                        return clazz.getSimpleName().toLowerCase().endsWith("dao");
-                    }
-                };
+        // TODO
 
-        // arrange
-        JavaClasses javaClassesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
-
-        // act
-        JavaClasses allJpaRepositoryClasses = javaClassesFromLibraryExample.that(predicateClassImplementsJpaRepository);
-        JavaClasses allDaoClasses = javaClassesFromLibraryExample.that(predicateClassIsADao);
-
-        // assert
-        assertThat(allJpaRepositoryClasses)
-                .describedAs("all JpaRepositories and all Daos are exactly the same classes")
-                .isEqualTo(allDaoClasses);
     }
 }

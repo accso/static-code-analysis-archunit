@@ -18,18 +18,11 @@ public class Example4_DaosAreJpaRepositoriesTest {
     // test fails because 'EntityDao' is a super class and is not a JpaRepository
     @Test
     void test_each_dao_is_a_jparepository_and_only_the_daos() {
-        // arrange, act, assert
-        ArchRuleDefinition.classes()
-                .that().areAssignableTo(JpaRepository.class)
-                .should().haveSimpleNameEndingWith("Dao")
-                .because("each class which is a JpaRepository should be named *Dao")
-                .check(classesFromLibraryExample);
 
-        // arrange, act, assert
-        ArchRuleDefinition.classes()
-                .that().haveSimpleNameEndingWith("Dao")
-                .should().beAssignableTo(JpaRepository.class)
-                .because("each class which is named *Dao should implement JpaRepository")
-                .check(classesFromLibraryExample);
+        // TODO
+
+
+        // TODO
+
     }
 }
