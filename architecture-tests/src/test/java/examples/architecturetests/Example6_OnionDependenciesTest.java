@@ -9,18 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
-class Layer {
-    String name;
-    String pkg;
-    Layer(String name, String pkg) { this.name = name; this.pkg = pkg; }
-}
-
-class Component {
-    String name;
-    Component(String name) { this.name = name; }
-}
-
-
 public class Example6_OnionDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce";
@@ -41,51 +29,72 @@ public class Example6_OnionDependenciesTest {
                 .check(classesFromEcommerceExample);
     }
 
+    // --------------------------------------------------------------------------------------------------------------
+
+    class Component {
+        String name;
+        String pkg;
+        Component(String name, String pkg) { this.name = name; this.pkg = pkg; }
+    }
+
     @Test
     void test_component_have_defined_dependencies() {
         // arrange
-        Component billing = new Component("..billing..");
-        Component common = new Component("..common..");
-        Component sales = new Component("..sales..");
-        Component shipping = new Component("..shipping..");
-        Component warehouse = new Component("..warehouse..");
+        Component billing   = new Component("Billing",   "..billing..");
+        Component common    = new Component("Common",    "..common..");
+        Component sales     = new Component("Sales",     "..sales..");
+        Component shipping  = new Component("Shipping",  "..shipping..");
+        Component warehouse = new Component("Warehouse", "..warehouse..");
 
         // act, assert
         ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(billing.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(billing.name, common.name, shipping.name, "java..")
-                .because("we want to manage dependencies from component billing explicitely")
+                .that().resideInAnyPackage(billing.pkg)
+                .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(billing.pkg, common.pkg, shipping.pkg, "java..")
+                .because("we want to manage dependencies from component " + billing.name + " explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(sales.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(sales.name, common.name, "java..")
-                .because("we want to manage dependencies from component sales explicitely")
+                .that().resideInAnyPackage(sales.pkg)
+                .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(sales.pkg, common.pkg, "java..")
+                .because("we want to manage dependencies from component " + sales.name + " explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(shipping.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(shipping.name, common.name, sales.name, "java..")
-                .because("we want to manage dependencies from component shipping explicitely")
+                .that().resideInAnyPackage(shipping.pkg)
+                .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(shipping.pkg, common.pkg, sales.pkg, "java..")
+                .because("we want to manage dependencies from component " + shipping.name + " explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(warehouse.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(warehouse.name, common.name, "java..")
-                .because("we want to manage dependencies from component warehouse explicitely")
+                .that().resideInAnyPackage(warehouse.pkg)
+                .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(warehouse.pkg, common.pkg, "java..")
+                .because("we want to manage dependencies from component " + warehouse.name + " explicitely")
                 .check(classesFromEcommerceExample);
         ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(common.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(common.name, "java..")
-                .because("we want to manage dependencies from component common explicitely")
+                .that().resideInAnyPackage(common.pkg)
+                .should().onlyDependOnClassesThat()
+                    .resideInAnyPackage(common.pkg, "java..")
+                .because("we want to manage dependencies from component " + common.name + " explicitely")
                 .check(classesFromEcommerceExample);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------
+
+    class Layer {
+        String name;
+        String pkg;
+        Layer(String name, String pkg) { this.name = name; this.pkg = pkg; }
     }
 
     @Test
     void test_onion_architecture_inside_one_component_using_layers() {
         // arrange
-        Layer apiLayer = new Layer("API", "..api..");
-        Layer applicationLayer = new Layer("Application", "..application..");
-        Layer domainLayer = new Layer("Domain", "..domain..");
+        Layer            apiLayer = new Layer("API",            "..api..");
+        Layer    applicationLayer = new Layer("Application",    "..application..");
+        Layer         domainLayer = new Layer("Domain",         "..domain..");
         Layer infrastructureLayer = new Layer("Infrastructure", "..infrastructure..");
-        Layer uiLayer = new Layer("UI", "..ui..");
+        Layer             uiLayer = new Layer("UI",             "..ui..");
 
         Architectures.LayeredArchitecture layeredArchitecture = Architectures.layeredArchitecture()
                 .withOptionalLayers(true)
@@ -110,12 +119,12 @@ public class Example6_OnionDependenciesTest {
         // arrange, act, assert
         onionArchitecture()
                 .withOptionalLayers(true)
-                .domainModels(PACKAGE_PREFIX + ".core.domain.model..")
-                .domainServices(PACKAGE_PREFIX + ".core.domain.services..")
+                .domainModels       (PACKAGE_PREFIX + ".core.domain.model..")
+                .domainServices     (PACKAGE_PREFIX + ".core.domain.services..")
                 .applicationServices(PACKAGE_PREFIX + ".core.application..")
                 .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.persistence..")
-                .adapter("cli", PACKAGE_PREFIX + ".infrastructure.cli..")
-                .adapter("monitoring", PACKAGE_PREFIX + ".infrastructure.monitoring..")
+                .adapter("cli",         PACKAGE_PREFIX + ".infrastructure.cli..")
+                .adapter("monitoring",  PACKAGE_PREFIX + ".infrastructure.monitoring..")
                 .because("we want to enforce the onion architecure inside each component")
                 .check(classesFromEcommerceExample);
     }
