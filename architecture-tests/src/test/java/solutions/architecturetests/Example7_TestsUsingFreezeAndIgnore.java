@@ -3,6 +3,7 @@ package solutions.architecturetests;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Test;
 
 public class Example7_TestsUsingFreezeAndIgnore {
@@ -29,13 +30,13 @@ public class Example7_TestsUsingFreezeAndIgnore {
      */
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl_with_freezing() {
-//        FreezingArchRule.freeze(
+        FreezingArchRule.freeze(
                 ArchRuleDefinition.classes()
                         .that()
                         .haveSimpleNameEndingWith("Impl")
                         .should()
                         .resideInAPackage("..impl")
-//        )
+        )
         .check(classesFromLibraryExample);
     }
 }
