@@ -106,8 +106,8 @@ public class Example6_OnionDependenciesTest {
 
         // act, assert
         layeredArchitecture
-                .whereLayer(apiLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 .whereLayer(domainLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
+                .whereLayer(apiLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 .whereLayer(infrastructureLayer.name).mayNotBeAccessedByAnyLayer()
                 .whereLayer(uiLayer.name).mayNotBeAccessedByAnyLayer()
                 .because("we want to enforce the onion architecure inside each component")
