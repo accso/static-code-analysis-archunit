@@ -22,4 +22,12 @@ public class Example1_NamingConventionsTest {
         // TODO
 
     }
+
+    // test fails as AuthorizationImpl is not in an impl package
+    @Test
+    void test_implementation_classes_must_not_reside_outside_a_package_named_impl() {
+
+        // TODO
+
+    }
 }
