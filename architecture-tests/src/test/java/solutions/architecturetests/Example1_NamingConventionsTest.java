@@ -18,7 +18,7 @@ public class Example1_NamingConventionsTest {
     // test fails as AuthorizationImpl is not in an impl package
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl() {
-
+        // arrange, act, assert
        ArchRuleDefinition.classes()
                 .that()
                 .haveSimpleNameEndingWith("Impl")
