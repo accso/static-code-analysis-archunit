@@ -18,15 +18,27 @@ public class Example1_NamingConventionsTest {
     // test fails as AuthorizationImpl is not in an impl package
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl() {
-        // arrange
-        ArchRule rule = ArchRuleDefinition.classes()
+
+       ArchRuleDefinition.classes()
                 .that()
                 .haveSimpleNameEndingWith("Impl")
                 .should()
-                .resideInAPackage("..impl");
+                .resideInAPackage("..impl")
+                .check(classesFromLibraryExample);
+    }
+
+    // test fails as AuthorizationImpl is not in an impl package
+    @Test
+    void test_implementation_classes_must_not_reside_outside_a_package_named_impl() {
+        // arrange
+        ArchRule rule = ArchRuleDefinition.noClasses()
+                .that()
+                .haveSimpleNameEndingWith("Impl")
+                .should()
+                .resideOutsideOfPackage("..impl..");
 
         // act, assert
         rule.because("we want to enforce naming conventions")
-            .check(classesFromLibraryExample);
+                .check(classesFromLibraryExample);
     }
 }
