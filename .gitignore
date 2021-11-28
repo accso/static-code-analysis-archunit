@@ -30,3 +30,4 @@ target/
 architecture-tests/target/
 dependency-analyzer/target/
 library-example/target/
+architecture-tests/freezestore/
