@@ -37,6 +37,8 @@ public class Example6_OnionDependenciesTest {
         Component(String name, String pkg) { this.name = name; this.pkg = pkg; }
     }
 
+    // test fails, as sales has wrong implementation (change in 'SalesEventProducer'
+    //    the 'ShippingMessaging' to 'SalesMessaging')
     @Test
     void test_component_have_defined_dependencies() {
         // arrange
@@ -98,6 +100,7 @@ public class Example6_OnionDependenciesTest {
 
         Architectures.LayeredArchitecture layeredArchitecture = Architectures.layeredArchitecture()
                 .withOptionalLayers(true)
+                .as("layered architecture as an internal onion structure")
                 .layer(apiLayer.name).definedBy(apiLayer.pkg)
                 .layer(applicationLayer.name).definedBy(applicationLayer.pkg)
                 .layer(domainLayer.name).definedBy(domainLayer.pkg)
@@ -114,17 +117,22 @@ public class Example6_OnionDependenciesTest {
                 .check(classesFromEcommerceExample);
     }
 
+    // test fails because of empty adapters and because of unwanted (though acceptable dependencies
+    //    from infrastructure classes implementing interfaces in application)
     @Test
     void test_onion_architecture_inside_one_component_using_onion() {
         // arrange, act, assert
         onionArchitecture()
                 .withOptionalLayers(true)
+                .as("architecture as an onion structure")
                 .domainModels       (PACKAGE_PREFIX + ".core.domain.model..")
                 .domainServices     (PACKAGE_PREFIX + ".core.domain.services..")
                 .applicationServices(PACKAGE_PREFIX + ".core.application..")
                 .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.persistence..")
                 .adapter("cli",         PACKAGE_PREFIX + ".infrastructure.cli..")
                 .adapter("monitoring",  PACKAGE_PREFIX + ".infrastructure.monitoring..")
+                .adapter("messaging",   PACKAGE_PREFIX + ".infrastructure.messaging..")
+                .adapter("ui",          PACKAGE_PREFIX + ".ui..")
                 .because("we want to enforce the onion architecure inside each component")
                 .check(classesFromEcommerceExample);
     }
