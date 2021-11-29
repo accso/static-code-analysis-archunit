@@ -35,7 +35,7 @@ public class Example1_NamingConventionsTest {
                 .that()
                 .haveSimpleNameEndingWith("Impl")
                 .should()
-                .resideOutsideOfPackage("..impl..");
+                .resideOutsideOfPackage("..impl");
 
         // act, assert
         rule.because("we want to enforce naming conventions")
