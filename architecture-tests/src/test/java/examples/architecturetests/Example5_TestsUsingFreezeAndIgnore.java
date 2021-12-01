@@ -6,7 +6,7 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Test;
 
-public class Example7_TestsUsingFreezeAndIgnore {
+public class Example5_TestsUsingFreezeAndIgnore {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
