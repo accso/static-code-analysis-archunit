@@ -22,7 +22,7 @@ public class Example2_DependenciesTest {
     @Test
     void test_classes_in_common_must_not_use_other_classes_except_standard_classes() {
 
-        // TODO
+        // TODO - live coding example 2
 
     }
 
@@ -30,7 +30,7 @@ public class Example2_DependenciesTest {
     @Test
     void test_classes_in_common_must_not_use_other_classes_except_standard_classes_with_evaluate() {
 
-        // TODO
+        // TODO - live coding example 2
 
     }
 }

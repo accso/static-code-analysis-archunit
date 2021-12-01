@@ -12,7 +12,7 @@ public class Example5_TestsUsingFreezeAndIgnore {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 7a - library example - test by ignoring some classes - see globally active archunit_ignore_patterns.txt
+     * example 5a - library example - test by ignoring some classes - see globally active archunit_ignore_patterns.txt
      */
 
     @Test
@@ -26,7 +26,7 @@ public class Example5_TestsUsingFreezeAndIgnore {
     }
 
     /**
-     * example 7b - library example - freeze violations which should be ignored
+     * example 5b - library example - freeze violations which should be ignored
      */
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl_with_freezing() {

@@ -14,11 +14,13 @@ public class Example3_CycleDetectionTest {
      * example 3 - library example - check for cycles
      */
 
+//TODO zu hoeherwertige Konzepte verschieben
+
     // test fails with two cycles
     @Test
     void test_first_level_packages_must_be_free_of_cycles() {
 
-        // TODO
+        // TODO - live coding example 3
 
     }
 
@@ -26,8 +28,7 @@ public class Example3_CycleDetectionTest {
     @Test
     void test_all_packages_must_be_free_of_cycles() {
 
-        // TODO
-
+        // TODO - live coding example 3
 
     }
 }

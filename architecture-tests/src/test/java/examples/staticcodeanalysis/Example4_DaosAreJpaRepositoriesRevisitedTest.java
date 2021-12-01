@@ -21,7 +21,7 @@ class Example4_DaosAreJpaRepositoriesRevisitedTest {
     @Test
     void test_that_all_JpaRepositories_and_all_Daos_are_exactly_the_same_classes() {
 
-        // TODO
+        // TODO - example 4 revisited with static code analysis
 
     }
 }

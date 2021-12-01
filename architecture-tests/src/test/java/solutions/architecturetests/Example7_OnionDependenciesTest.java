@@ -27,7 +27,7 @@ public class Example7_OnionDependenciesTest {
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 6 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
+     * example 7 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
      */
 
     @Test
@@ -50,6 +50,8 @@ public class Example7_OnionDependenciesTest {
         Component shipping = new Component("..shipping..");
         Component warehouse = new Component("..warehouse..");
 
+
+//TODO kuerzen
         // act, assert
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(billing.name)
@@ -96,8 +98,10 @@ public class Example7_OnionDependenciesTest {
                 .layer(uiLayer.name).definedBy(uiLayer.pkg);
 
         // act, assert
+//TODO funktioniert nicht
         layeredArchitecture
-                .whereLayer(apiLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
+                .whereLayer(apiLayer.name).mayNotBeAccessedByAnyLayer()
+                .whereLayer(applicationLayer.name).mayOnlyAccessLayers(domainLayer.name)
                 .whereLayer(domainLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 .whereLayer(infrastructureLayer.name).mayNotBeAccessedByAnyLayer()
                 .whereLayer(uiLayer.name).mayNotBeAccessedByAnyLayer()
