@@ -34,22 +34,24 @@ public class Example2_DependenciesTest {
 
     // test fails
     @Test
-    void test_allowed_dependencies_of_model_classes() {
+    void test_classes_in_common_must_not_use_other_classes_except_standard_classes_with_evaluate() {
         // arrange
-        ArchRule rule = ArchRuleDefinition.classes().that()
-                .resideInAPackage("..model..")
+        ArchRule rule = ArchRuleDefinition.classes()
+                .that()
+                .resideInAPackage("..common..")
                 .should()
                 .onlyDependOnClassesThat()
-                .resideInAnyPackage("java..", "javax..", "..model..", "org.apache.commons.lang3..");
+                .resideInAnyPackage("..common..", "java..", "org..")
+                .because("we want to manage dependencies explicitely");
 
         // act
         EvaluationResult evaluationResult = rule
-                .because("we want to manage model dependencies explicitely")
+                .because("we want to manage dependencies explicitely")
                 .evaluate(classesFromLibraryExample);
 
         // assert
         assertThat(evaluationResult.getFailureReport().getDetails())
-                .describedAs("only allowed dependencies of model classes")
+                .describedAs("only allowed dependencies of common classes")
                 .isEmpty();
     }
 }
