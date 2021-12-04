@@ -21,7 +21,7 @@ public class Example7_Metrics {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 8 - ecommerce example - show some cumulative dependency metrics
+     * example 7 - ecommerce example - show some cumulative dependency metrics
      */
 
     @Test

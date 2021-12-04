@@ -12,7 +12,7 @@ public class Example3_DaosAreJpaRepositoriesTest {
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 4a and 4b - library example - test that all Daos are JpaRepositories (and vice versa)
+     * example 3 - library example - test that all Daos are JpaRepositories (and vice versa)
      */
 
     // test fails because 'EntityDao' is a super class and is not a JpaRepository

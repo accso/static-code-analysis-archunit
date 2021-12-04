@@ -27,7 +27,7 @@ public class Example6_OnionDependenciesTest {
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 7 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
+     * example 6 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
      */
 
     // test fails because of sales->shipping->sales cycle
