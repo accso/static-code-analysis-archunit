@@ -7,6 +7,11 @@ import com.tngtech.archunit.library.Architectures;
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
 class Layer {
@@ -27,7 +32,7 @@ public class Example6_OnionDependenciesTest {
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 6 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
+     * example 6 - ecommerce example - testing cycles, dependencies on components, on on onion architecture (via layers)
      */
 
     // test fails because of sales->shipping->sales cycle
@@ -42,42 +47,33 @@ public class Example6_OnionDependenciesTest {
                 .check(classesFromEcommerceExample);
     }
 
+
     @Test
     void test_component_have_defined_dependencies() {
         // arrange
-        Component billing = new Component("..billing..");
-        Component common = new Component("..common..");
-        Component sales = new Component("..sales..");
-        Component shipping = new Component("..shipping..");
+        Component billing   = new Component("..billing..");
+        Component common    = new Component("..common..");
+        Component sales     = new Component("..sales..");
+        Component shipping  = new Component("..shipping..");
         Component warehouse = new Component("..warehouse..");
 
+        // act and assert
+        checkDependencies(billing,   common, shipping);
+        checkDependencies(sales,     common);
+        checkDependencies(shipping,  common, sales);
+        checkDependencies(warehouse, common);
+        checkDependencies(common);
+    }
+    private void checkDependencies(Component from, Component... to) {
+        List<String> toNames = Arrays.stream(to).map(c -> c.name).collect(Collectors.toList());
+        toNames.add("java..");  // add depdendency to java as default
+        toNames.add(from.name); // add self as allowed dependency
+        String[] toNamesWithJava = toNames.toArray(String[]::new);
 
-//TODO kuerzen
-        // act, assert
         ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(billing.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(billing.name, common.name, shipping.name, "java..")
-                .because("we want to manage dependencies from component billing explicitely")
-                .check(classesFromEcommerceExample);
-        ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(sales.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(sales.name, common.name, "java..")
-                .because("we want to manage dependencies from component sales explicitely")
-                .check(classesFromEcommerceExample);
-        ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(shipping.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(shipping.name, common.name, sales.name, "java..")
-                .because("we want to manage dependencies from component shipping explicitely")
-                .check(classesFromEcommerceExample);
-        ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(warehouse.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(warehouse.name, common.name, "java..")
-                .because("we want to manage dependencies from component warehouse explicitely")
-                .check(classesFromEcommerceExample);
-        ArchRuleDefinition.classes()
-                .that().resideInAnyPackage(common.name)
-                .should().onlyDependOnClassesThat().resideInAnyPackage(common.name, "java..")
-                .because("we want to manage dependencies from component common explicitely")
+                .that().resideInAnyPackage(from.name)
+                .should().onlyDependOnClassesThat().resideInAnyPackage(toNamesWithJava)
+                .because("we want to manage dependencies from component " + from.name + " explicitely")
                 .check(classesFromEcommerceExample);
     }
 
