@@ -16,6 +16,8 @@ class Example5_TransitiveDependencies {
      */
     private val TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED = "de.accso.library"
 
+    // TODO live coding - example 5
+
     // test does not fail
     @Test
     fun `find all transitive dependencies to class Book in datamanagement`() {
