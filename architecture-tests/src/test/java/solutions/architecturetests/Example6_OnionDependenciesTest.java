@@ -21,7 +21,7 @@ class Component {
 }
 
 
-public class Example7_OnionDependenciesTest {
+public class Example6_OnionDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
@@ -30,6 +30,7 @@ public class Example7_OnionDependenciesTest {
      * example 7 - ecommerce example - testing dependencies on components, on on onion architecture (via layers)
      */
 
+    // test fails because of sales->shipping->sales cycle
     @Test
     void test_slices_are_free_of_cycles() {
         // arrange, act, assert

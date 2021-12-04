@@ -6,7 +6,7 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class Example4_DaosAreJpaRepositoriesTest {
+public class Example3_DaosAreJpaRepositoriesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
