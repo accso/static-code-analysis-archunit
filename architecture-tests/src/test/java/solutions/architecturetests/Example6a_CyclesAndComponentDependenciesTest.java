@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
-public class Example6a_CyclesAndLayerDependenciesTest {
+public class Example6a_CyclesAndComponentDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
