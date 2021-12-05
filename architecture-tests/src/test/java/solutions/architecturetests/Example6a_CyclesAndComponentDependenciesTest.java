@@ -28,7 +28,7 @@ public class Example6a_CyclesAndComponentDependenciesTest {
     void test_slices_are_free_of_cycles() {
         // arrange, act, assert
         SlicesRuleDefinition.slices()
-                .matching(PACKAGE_PREFIX + ".(*)..")
+                .matching(PACKAGE_PREFIX + "(*)..")
                 .should()
                 .beFreeOfCycles()
                 .because("cycles are bad")
