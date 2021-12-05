@@ -27,7 +27,8 @@ class Example5_TransitiveDependencies {
         val bookClazz = de.accso.library.datamanagement.model.Book::class
 
         // act
-        val dependentClazzes = dependencyAnalyzer.clazzesTransitivelyDependentOn(bookClazz, "de.accso.library.datamanagement..")
+        val dependentClazzes = dependencyAnalyzer.clazzesTransitivelyDependentOn(bookClazz,
+                "de.accso.library.datamanagement..")
         // dependentClazzes.forEach{ println(it.qualifiedName) }
 
         // assert
@@ -50,7 +51,8 @@ class Example5_TransitiveDependencies {
         val bookClazz = de.accso.library.datamanagement.model.Book::class
 
         // act
-        val dependencyChainsOn = dependencyAnalyzer.dependencyChainsOn(bookClazz, "de.accso.library.datamanagement..")
+        val dependencyChainsOn = dependencyAnalyzer.transitiveDependencyChainsOn(bookClazz,
+                "de.accso.library.datamanagement..")
         dependencyChainsOn.forEach{ println(it) }
 
         // assert

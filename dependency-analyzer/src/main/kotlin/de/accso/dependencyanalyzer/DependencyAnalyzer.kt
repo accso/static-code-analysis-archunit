@@ -66,16 +66,16 @@ class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: St
 
     // ------------------------------------------------------------------------------------------------------------
 
-    fun dependencyChainsOn(targetKClazz: KClass<*>, filterForPackage: String) =
-        dependencyChainsOn(listOf(targetKClazz), listOf(filterForPackage))
+    fun transitiveDependencyChainsOn(targetKClazz: KClass<*>, filterForPackage: String) =
+        transitiveDependencyChainsOn(listOf(targetKClazz), listOf(filterForPackage))
 
-    fun dependencyChainsOn(targetKClazz: KClass<*>, filterForPackages: List<String> = emptyList()) =
-        dependencyChainsOn(listOf(targetKClazz), filterForPackages)
+    fun transitiveDependencyChainsOn(targetKClazz: KClass<*>, filterForPackages: List<String> = emptyList()) =
+        transitiveDependencyChainsOn(listOf(targetKClazz), filterForPackages)
 
-    fun dependencyChainsOn(targetKClazzes: List<KClass<*>>, filterForPackage: String) =
-        dependencyChainsOn(targetKClazzes, listOf(filterForPackage))
+    fun transitiveDependencyChainsOn(targetKClazzes: List<KClass<*>>, filterForPackage: String) =
+        transitiveDependencyChainsOn(targetKClazzes, listOf(filterForPackage))
 
-    fun dependencyChainsOn(targetKClazzes: List<KClass<*>>, filterForPackages: List<String> = emptyList()): Set<DependencyChain> {
+    fun transitiveDependencyChainsOn(targetKClazzes: List<KClass<*>>, filterForPackages: List<String> = emptyList()): Set<DependencyChain> {
         val targetKClazzesAndItSealedSubclazzes = targetKClazzes.map { it.clazzAndItsSealedSubClazzes() }.flatten()
 
         val backwardAnalysis = DependencyAnalyzerBackwardAnalysisViaArchUnitDependencyGraph(

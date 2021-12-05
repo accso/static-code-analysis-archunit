@@ -452,7 +452,7 @@ class DependencyAnalyzerTests {
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage14.Bottom::class
 
         // act
-        val dependencyChainsOn = sut.dependencyChainsOn(targetKClazz)
+        val dependencyChainsOn = sut.transitiveDependencyChainsOn(targetKClazz)
         // dependentClazzes.forEach{ println(it.from.qualifiedName) }
 
         // assert
