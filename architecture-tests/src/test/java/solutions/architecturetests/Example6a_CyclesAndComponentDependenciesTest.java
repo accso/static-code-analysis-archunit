@@ -58,7 +58,7 @@ public class Example6a_CyclesAndComponentDependenciesTest {
         Component warehouse = new Component("Warehouse", "..warehouse..");
 
         // act and assert
-        checkDependencies(billing,   common, shipping);
+        checkDependencies(billing,   common, shipping, sales);
         checkDependencies(sales,     common);
         checkDependencies(shipping,  common, sales);
         checkDependencies(warehouse, common);
