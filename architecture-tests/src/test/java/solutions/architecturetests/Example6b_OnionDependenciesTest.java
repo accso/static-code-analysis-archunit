@@ -58,7 +58,7 @@ public class Example6b_OnionDependenciesTest {
                 .whereLayer(apiLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 // test fails with the following line activated. Is this a bug in ArchUnit?!?
                 //   .whereLayer(applicationLayer.name).mayOnlyAccessLayers(apiLayer.name, domainLayer.name)
-                .whereLayer(applicationLayer.name).mayOnlyBeAccessedByLayers(infrastructureLayer.name)
+                .whereLayer(applicationLayer.name).mayOnlyBeAccessedByLayers(infrastructureLayer.name, uiLayer.name)
                 .whereLayer(domainLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
                 .whereLayer(infrastructureLayer.name).mayNotBeAccessedByAnyLayer()
                 .whereLayer(infrastructureLayer.name).mayOnlyAccessLayers(applicationLayer.name)
