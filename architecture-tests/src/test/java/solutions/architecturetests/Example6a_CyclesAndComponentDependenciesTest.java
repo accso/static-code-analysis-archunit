@@ -55,7 +55,7 @@ public class Example6a_CyclesAndComponentDependenciesTest {
 
         // act and assert
         checkDependencies(billing,   common, shipping, sales);
-        checkDependencies(sales,     common);
+        checkDependencies(sales,     common, warehouse);
         checkDependencies(shipping,  common, sales);
         checkDependencies(warehouse, common);
         checkDependencies(common);

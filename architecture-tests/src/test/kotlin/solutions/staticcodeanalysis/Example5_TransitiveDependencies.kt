@@ -29,7 +29,7 @@ class Example5_TransitiveDependencies {
         // act
         val dependentClazzes = dependencyAnalyzer.clazzesTransitivelyDependentOn(bookClazz,
                 "de.accso.library.datamanagement..")
-        // dependentClazzes.forEach{ println(it.qualifiedName) }
+        dependentClazzes.forEach{ println(it.qualifiedName) }
 
         // assert
         assertThat(dependentClazzes)
