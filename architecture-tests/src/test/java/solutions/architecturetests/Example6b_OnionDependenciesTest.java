@@ -8,6 +8,7 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.Architectures;
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 import de.accso.ecommerce.common.Event;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
+@Disabled("ArchUnit test would fail because of a bug in ArchUnit version v0.22.0, which is meanwhile fixed. Until v.0.23.0 is available we commented out the evil 'whereLayer' statement.")
 public class Example6b_OnionDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
@@ -34,7 +36,8 @@ public class Example6b_OnionDependenciesTest {
         Layer(String name, String pkg) { this.name = name; this.pkg = pkg; }
     }
 
-    // test is not failing, but potential ArchUnit bug see below
+    // test fails with the whereLayer() statement is commented in.
+    // This is an ArchUnit issue, see https://github.com/TNG/ArchUnit/issues/739
     @Test
     void test_onion_architecture_inside_one_component_using_layers() {
         // arrange
@@ -56,7 +59,7 @@ public class Example6b_OnionDependenciesTest {
         // act, assert
         layeredArchitecture
                 .whereLayer(apiLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)
-                // test fails with the following line activated. Is this a bug in ArchUnit?!?
+// test fails with the following line activated. This is an ArchUnit issue, see https://github.com/TNG/ArchUnit/issues/739
                 //   .whereLayer(applicationLayer.name).mayOnlyAccessLayers(apiLayer.name, domainLayer.name)
                 .whereLayer(applicationLayer.name).mayOnlyBeAccessedByLayers(infrastructureLayer.name, uiLayer.name)
                 .whereLayer(domainLayer.name).mayOnlyBeAccessedByLayers(applicationLayer.name)

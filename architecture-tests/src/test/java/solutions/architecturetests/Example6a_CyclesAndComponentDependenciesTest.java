@@ -4,14 +4,14 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.tngtech.archunit.library.Architectures.onionArchitecture;
-
+@Disabled("ArchUnit test fails because of an intentional violation: The eCommerce example has cycles in slices and also some wrong dependencies")
 public class Example6a_CyclesAndComponentDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";

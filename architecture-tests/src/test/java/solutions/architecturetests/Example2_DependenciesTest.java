@@ -5,10 +5,12 @@ import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.EvaluationResult;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled("ArchUnit test fails because of an intentional violation: common class AuthorizationImpl uses more than only standard classes")
 public class Example2_DependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";

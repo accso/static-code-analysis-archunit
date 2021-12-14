@@ -4,11 +4,13 @@ import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled("ArchUnit test fails because of an intentional violation: EntityDao as a super class is not a JpaRepository")
 class Example3_DaosAreJpaRepositoriesRevisitedTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";

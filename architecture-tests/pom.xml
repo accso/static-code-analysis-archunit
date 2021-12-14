@@ -1,15 +1,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>static-code-analysis-archunit</artifactId>
+		<groupId>de.accso</groupId>
+		<version>0.1</version>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>de.accso</groupId>
 	<artifactId>architecture-tests</artifactId>
 	<version>0.1</version>
+	<packaging>jar</packaging>
 
-	<parent>
-		<groupId>de.accso</groupId>
-		<artifactId>static-code-analysis-archunit</artifactId>
-		<version>0.1</version>
-	</parent>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jetbrains.kotlin</groupId>
+				<artifactId>kotlin-maven-plugin</artifactId>
+				<version>${kotlin.version}</version>
+				<configuration>
+					<sourceDirs>
+						<source>${project.basedir}/src/test/kotlin</source>
+					</sourceDirs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>test-compile</id>
+						<goals>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencies>
 		<dependency>
@@ -35,6 +66,5 @@
 			<version>${archunit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 </project>

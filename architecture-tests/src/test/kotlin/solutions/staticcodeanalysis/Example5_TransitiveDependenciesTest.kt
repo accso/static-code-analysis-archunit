@@ -9,7 +9,7 @@ import de.accso.library.datamanagement.model.MediaType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class Example5_TransitiveDependencies {
+class Example5_TransitiveDependenciesTest {
 
     /**
      * example 5 - library example - Kotlin - get transitive dependencies and dependency chains
@@ -18,7 +18,6 @@ class Example5_TransitiveDependencies {
 
     // TODO live coding - example 5
 
-    // test does not fail
     @Test
     fun `find all transitive dependencies to class Book in datamanagement`() {
         // arrange
@@ -42,7 +41,6 @@ class Example5_TransitiveDependencies {
                 ))
     }
 
-    // test does not fail
     @Test
     fun `find all transitive dependency chains to class Book in datamanagement`() {
         // arrange
