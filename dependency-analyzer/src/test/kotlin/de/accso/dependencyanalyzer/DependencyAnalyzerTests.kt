@@ -20,7 +20,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle abhaengigen API-Klassen auch in mehreren Dateien und auch bei mehrfacher Abhaengigkeit`() {
+    fun `find transitive dependending API classes also in several files and also with duplicate dependencies`() {
         // arrange
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 
@@ -46,7 +46,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle abhaengigen Domain-Klassen auch in mehreren Dateien und auch bei mehrfacher Abhaengigkeit`() {
+    fun `find transitive dependending domain classes also in several files and also with duplicate dependencies`() {
         // arrange
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 
@@ -70,7 +70,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `filtert exakt ueber den Packagenamen und filtert also Subpackage aus`() {
+    fun `filter exactly via the package name and also filter out sub packages`() {
         // arrange
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 
@@ -101,7 +101,7 @@ class DependencyAnalyzerTests {
         "de.accso.doesnotexist",
         "de.accso.doesnotexist..",
     ])
-    fun `filtert alles da Filter-Package-Namen nicht existieren`(nonExistingPackage: String) {
+    fun `filter all out as filter package names do not exist`(nonExistingPackage: String) {
         // arrange
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 
@@ -121,7 +121,7 @@ class DependencyAnalyzerTests {
         "de.accso.module1..",
         "de.accso.module2..",
     ])
-    fun `filtert alles da Filter-Package-Name keine eingehende Abhaengigkeit auf Target haben kann`(filterForPackage: String) {
+    fun `filter all out as the filter package name cannot have a dependency to the target`(filterForPackage: String) {
         // arrange
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 
@@ -141,7 +141,7 @@ class DependencyAnalyzerTests {
         "accso.de",
         "my.package"
     ])
-    fun `wirft Exception da zu analysierende Klasse nicht gefunden wird`(analyzeNonExistingPackagePrefix: String) {
+    fun `throws an exception as the class to be analyzed is not found`(analyzeNonExistingPackagePrefix: String) {
         // arrange
         val sut = DependencyAnalyzer(analyzeNonExistingPackagePrefix, true)
 
@@ -154,7 +154,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `wirft Exception da zu analysierende Test-Klasse nicht gefunden wird wenn Test-Code nicht analysiert wird`() {
+    fun `throws an exception as the class to be analyzed is not found when test code is not analyzed at all`() {
         // arrange
         val analyzeTestCode = false
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, analyzeTestCode)
@@ -168,7 +168,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle abhaengigen Domain-Klassen die von einer Klasse inklusive der Kt-Datei`() {
+    fun `find transitive dependending domain classes including the Kt file`() {
         // arrange
 
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage2.TargetIsUsedAlsoInVariable::class
@@ -192,7 +192,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auch bei Nullability`() {
+    fun `find transitive dependendencies including Nullability`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage3.TargetUsedAsNullable::class
 
@@ -212,7 +212,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auf eine Sealed-Class inklusive aller Subsealed-Classes`() {
+    fun `find transitive dependendencies to a Sealed class including all sealed sub classes`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage4.TargetIsASealedClazz::class
 
@@ -236,7 +236,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auf eine Sealed-Sub-Class`() {
+    fun `find transitive dependendencies to a sealed sub class`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage4.TargetIsASealedClazz.TargetIsASealedClazz1::class
 
@@ -256,7 +256,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auch ueber den Generic Type in einer Collection`() {
+    fun `find transitive dependendencies also via the generic type of a collection`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage5.TargetUsedAsGenericTypeInCollection::class
 
@@ -280,7 +280,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auch aus einem Companion Object`() {
+    fun `find transitive dependendencies from a companion object`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage6.TargetUsedInCompanionObject::class
 
@@ -300,7 +300,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten per Vererbung von Super-Klassen`() {
+    fun `find transitive dependendencies via inheritance from a super class`() {
         // arrange
         val targetKClazz1 = de.accso.dependencyanalyzer.testset.testpackage7.TargetIsOpenSuperClazz::class
         val targetKClazz2 = de.accso.dependencyanalyzer.testset.testpackage7.TargetIsAbstractSuperClazz::class
@@ -323,7 +323,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auf ein Interface`() {
+    fun `find transitive dependendencies to an interface`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage8.TargetIsAnInterface::class
 
@@ -345,7 +345,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten aus einem Object`() {
+    fun `find transitive dependendencies from an object`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage9.TargetUsedInObject::class
 
@@ -365,7 +365,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten sowohl auf Data Class als auch auf normale Class`() {
+    fun `find transitive dependendencies to a data class and a normal class`() {
         // arrange
         val targetKClazz1 = de.accso.dependencyanalyzer.testset.testpackage10.TargetIsNormalClazz::class
         val targetKClazz2 = de.accso.dependencyanalyzer.testset.testpackage10.TargetIsDataClazz::class
@@ -385,7 +385,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auch aus einem Array oder List oder Set`() {
+    fun `find transitive dependendencies also from array or a list or a set`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage11.TargetIsUsedInCollection::class
 
@@ -406,7 +406,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auch bei Type-Alias`() {
+    fun `find transitive dependendencies also via type alias`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage12.Target::class
 
@@ -425,7 +425,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `findet transitiv alle eingehenden Abhaengigkeiten auch auf ein Enum`() {
+    fun `find transitive dependendencies also to an enum`() {
         // arrange
         val targetKClazz = de.accso.dependencyanalyzer.testset.testpackage13.TargetIsAnEnum::class
 
@@ -445,7 +445,7 @@ class DependencyAnalyzerTests {
     }
 
     @Test
-    fun `setzt die Abhaengigkeiten in einer korrekten Kette ein`() {
+    fun `find all transitive dependency chains in the correct order`() {
         // arrange
         val sut = DependencyAnalyzer(TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED, true)
 

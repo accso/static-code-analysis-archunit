@@ -7,9 +7,13 @@
         <groupId>de.accso</groupId>
         <version>0.1</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>de.accso</groupId>
     <artifactId>ecommerce-example</artifactId>
+    <version>0.1</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
