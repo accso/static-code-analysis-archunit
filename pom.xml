@@ -15,6 +15,8 @@
 		<archunit.version>0.22.0</archunit.version>
 
 		<junit.version>5.8.1</junit.version>
+		<jmolecules.version>1.4.0</jmolecules.version>
+		<jmolecules.integration.version>0.8.0</jmolecules.integration.version>
 
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -74,5 +76,25 @@
 			<version>${archunit.version}</version>
 			<!-- scope>test</scope -->
 		</dependency>
+
+		<!-- jMolecules -->
+		<dependency>
+			<groupId>org.jmolecules</groupId>
+			<artifactId>jmolecules-ddd</artifactId>
+			<version>${jmolecules.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jmolecules.integrations/jmolecules-archunit -->
+		<dependency>
+			<groupId>org.jmolecules.integrations</groupId>
+			<artifactId>jmolecules-archunit</artifactId>
+			<version>${jmolecules.integration.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jmolecules/jmolecules-layered-architecture -->
+		<dependency>
+			<groupId>org.jmolecules</groupId>
+			<artifactId>jmolecules-layered-architecture</artifactId>
+			<version>${jmolecules.version}</version>
+		</dependency>
+
 	</dependencies>
 </project>

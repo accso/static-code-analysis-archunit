@@ -4,16 +4,10 @@ import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
-import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.Architectures;
-import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 import de.accso.ecommerce.common.Event;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
@@ -70,6 +64,8 @@ public class Example6b_OnionDependenciesTest {
                 .ignoreDependency(isEcommerceClass, isJavaClass)
                 // ignore all dependencies to ...common.Event
                 .ignoreDependency(isEcommerceClass, isEventClass)
+                // ignore allJMolecules annotations
+                .ignoreDependency(isEcommerceClass, isJMoleculesAnnotationClass)
                 .because("we want to enforce the onion architecure inside each component")
                 .check(classesFromEcommerceExample);
     }
@@ -97,16 +93,25 @@ public class Example6b_OnionDependenciesTest {
             return input.isAssignableTo(Event.class);
         }
     };
+
     DescribedPredicate<JavaClass> isJavaClass = new DescribedPredicate<>("is Java class") {
         @Override
         public boolean apply(JavaClass input) {
             return input.getPackageName().startsWith("java");
         }
     };
+
     DescribedPredicate<JavaClass> isEcommerceClass = new DescribedPredicate<>("is any Ecommerce class") {
         @Override
         public boolean apply(JavaClass input) {
             return input.getPackageName().startsWith(PACKAGE_PREFIX);
+        }
+    };
+
+    DescribedPredicate<JavaClass> isJMoleculesAnnotationClass = new DescribedPredicate<>("is any JMolecules annotation") {
+        @Override
+        public boolean apply(JavaClass input) {
+            return input.isAnnotation() && input.getPackageName().startsWith("org.jmolecules");
         }
     };
 
