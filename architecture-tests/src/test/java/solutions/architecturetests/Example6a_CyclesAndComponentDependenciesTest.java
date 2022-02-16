@@ -21,7 +21,7 @@ public class Example6a_CyclesAndComponentDependenciesTest {
      * example 6a - ecommerce example - testing cycles, dependencies on components
      */
 
-    // TODO live coding - example 6a
+    // TODO live coding - example 6a (ecommerce, cycles, component dependencies)
 
     // test fails because of sales->shipping->sales cycle
     @Test

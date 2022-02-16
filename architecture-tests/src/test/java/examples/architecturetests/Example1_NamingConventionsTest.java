@@ -21,7 +21,7 @@ public class Example1_NamingConventionsTest {
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl() {
 
-        // TODO - live coding example 1
+        // TODO live coding - example 1 (impl classes in impl package)
 
     }
 
@@ -29,7 +29,7 @@ public class Example1_NamingConventionsTest {
     @Test
     void test_implementation_classes_must_not_reside_outside_a_package_named_impl() {
 
-        // TODO - live coding example 1
+        // TODO live coding - example 1 (no impl classes outside impl package)
 
     }
 }

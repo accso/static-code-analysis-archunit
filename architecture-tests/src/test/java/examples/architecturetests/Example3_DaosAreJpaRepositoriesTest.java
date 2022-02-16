@@ -21,7 +21,7 @@ public class Example3_DaosAreJpaRepositoriesTest {
     @Test
     void test_each_dao_is_a_jparepository_and_only_the_daos() {
 
-        // TODO - live coding example 3
+        // TODO live coding - example 3 (all DAOs are JpaRepositories)
 
     }
 }

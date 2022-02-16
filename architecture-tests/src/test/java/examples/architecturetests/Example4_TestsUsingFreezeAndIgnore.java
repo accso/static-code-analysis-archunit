@@ -20,7 +20,7 @@ public class Example4_TestsUsingFreezeAndIgnore {
     @Test
     void test_implementation_classes_must_reside_in_a_packaged_named_impl_ignore_authorization() {
 
-        // TODO - live coding example 4 (comment in the line in archunit_ignore_patterns.txt)
+        // TODO live coding - example 4 (ignore via archunit_ignore_patterns.txt)
 
         ArchRuleDefinition.classes()
                 .that()
@@ -36,7 +36,7 @@ public class Example4_TestsUsingFreezeAndIgnore {
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl_with_freezing() {
 
-        // TODO - live coding example 4
+        // TODO live coding - example 4 (ignore with freezing)
 
         ArchRuleDefinition.classes()
                 .that()

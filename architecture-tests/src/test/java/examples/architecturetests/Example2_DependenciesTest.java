@@ -24,7 +24,7 @@ public class Example2_DependenciesTest {
     @Test
     void test_classes_in_common_must_not_use_other_classes_except_standard_classes() {
 
-        // TODO - live coding example 2
+        // TODO live coding - example 2 (dependencies in common, check result)
 
     }
 
@@ -32,7 +32,7 @@ public class Example2_DependenciesTest {
     @Test
     void test_classes_in_common_must_not_use_other_classes_except_standard_classes_with_evaluate() {
 
-        // TODO - live coding example 2
+        // TODO live coding - example 2 (dependencies in common, evaluate result)
 
     }
 }

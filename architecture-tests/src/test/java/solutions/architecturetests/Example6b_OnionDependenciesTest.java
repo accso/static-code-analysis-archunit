@@ -22,7 +22,7 @@ public class Example6b_OnionDependenciesTest {
      * example 6b - ecommerce example - testing onion architecture (via layers)
      */
 
-    // TODO live coding - example 6b
+    // TODO live coding - example 6b (ecommerce, onion/layers)
 
     class Layer {
         String name;
