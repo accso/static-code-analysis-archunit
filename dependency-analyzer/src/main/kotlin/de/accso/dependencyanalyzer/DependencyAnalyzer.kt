@@ -29,7 +29,7 @@ class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: St
         allJavaClazzesToAnalyze =
             clazzFileImporter
                 .importPackages(analyzeDependenciesOnPackagesWithPrefix)
-// TODO is "that" needed or is this redundant to the "importPackages" already?
+//TODO is the following "that" really needed or is this redundant to the "importPackages" already?
                 .that(
                     object: DescribedPredicate<JavaClass>("package starts with given value") {
                         override fun apply(clazz: JavaClass) =

@@ -36,11 +36,11 @@ fun KClass<*>.usesAsArgumentInConstructor(targetKClazz: KClass<*>): Boolean =
                 }
             }
         }
-        .multiCatch(UnsupportedOperationException::class,
-                    InternalError::class,
-                    ClassNotFoundException::class,
-                    NoClassDefFoundError::class,
-                    IncompatibleClassChangeError::class)
+        .catchAll(UnsupportedOperationException::class,
+                  InternalError::class,
+                  ClassNotFoundException::class,
+                  NoClassDefFoundError::class,
+                  IncompatibleClassChangeError::class)
         {
             // ignore errors of this type:
             //   java.lang.UnsupportedOperationException: Packages and file facades are not yet supported in Kotlin reflection.

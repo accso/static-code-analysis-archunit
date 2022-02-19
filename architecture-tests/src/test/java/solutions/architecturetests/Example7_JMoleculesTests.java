@@ -4,8 +4,10 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.ArchRule;
 import org.jmolecules.archunit.JMoleculesArchitectureRules;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled("Test using JMolecules fails because of an intentional violation: Wrong layering in the eCommerce example")
 public class Example7_JMoleculesTests {
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);

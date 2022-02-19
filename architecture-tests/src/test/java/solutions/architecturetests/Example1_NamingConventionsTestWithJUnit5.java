@@ -8,7 +8,8 @@ import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 
 @AnalyzeClasses(packages = "de.accso.library", cacheMode = CacheMode.FOREVER)
-public class Example1_NamingConventions_As_Junit5_Test {
+//@Disabled("ArchUnit test fails because of an intentional violation: AuthorizationImpl is not in an impl package, see @ArchIgnore below")
+public class Example1_NamingConventionsTestWithJUnit5 {
 
     /**
      * example 1 - library example - test naming conventions on "impl" classes, written as a Junit 5 test

@@ -15,7 +15,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Example7_MetricsTest {
+public class Example8_MetricsTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.library";
     private static JavaClasses classesFromLibraryExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
