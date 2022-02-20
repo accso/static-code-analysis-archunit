@@ -12,7 +12,7 @@
 		<kotlin.version>1.5.30</kotlin.version>
 		<kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
-		<archunit.version>0.22.0</archunit.version>
+		<archunit.version>0.23.0</archunit.version>
 
 		<junit.version>5.8.1</junit.version>
 		<jmolecules.version>1.4.0</jmolecules.version>
