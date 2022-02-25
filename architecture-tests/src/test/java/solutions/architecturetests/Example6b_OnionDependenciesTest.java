@@ -87,29 +87,29 @@ public class Example6b_OnionDependenciesTest {
 
     DescribedPredicate<JavaClass> isEventClass = new DescribedPredicate<>("is common.Event class") {
         @Override
-        public boolean apply(JavaClass input) {
-            return input.isAssignableTo(Event.class);
+        public boolean apply(JavaClass clazz) {
+            return clazz.isAssignableTo(Event.class);
         }
     };
 
     DescribedPredicate<JavaClass> isJavaClass = new DescribedPredicate<>("is Java class") {
         @Override
-        public boolean apply(JavaClass input) {
-            return input.getPackageName().startsWith("java");
+        public boolean apply(JavaClass clazz) {
+            return clazz.getPackageName().startsWith("java");
         }
     };
 
     DescribedPredicate<JavaClass> isEcommerceClass = new DescribedPredicate<>("is any Ecommerce class") {
         @Override
-        public boolean apply(JavaClass input) {
-            return input.getPackageName().startsWith(PACKAGE_PREFIX);
+        public boolean apply(JavaClass clazz) {
+            return clazz.getPackageName().startsWith(PACKAGE_PREFIX);
         }
     };
 
     DescribedPredicate<JavaClass> isJMoleculesAnnotationClass = new DescribedPredicate<>("is any JMolecules annotation") {
         @Override
-        public boolean apply(JavaClass input) {
-            return input.isAnnotation() && input.getPackageName().startsWith("org.jmolecules");
+        public boolean apply(JavaClass clazz) {
+            return clazz.isAnnotation() && clazz.getPackageName().startsWith("org.jmolecules");
         }
     };
 
