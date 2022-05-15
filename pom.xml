@@ -15,6 +15,7 @@
 		<archunit.version>0.23.0</archunit.version>
 
 		<junit.version>5.8.1</junit.version>
+		<assertj.version>3.21.0</assertj.version>
 		<jmolecules.version>1.4.0</jmolecules.version>
 		<jmolecules.integration.version>0.8.0</jmolecules.integration.version>
 
@@ -55,20 +56,20 @@
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>3.21.0</version>
-			<scope>test</scope>
+			<version>${assertj.version}</version>
+			<!-- scope>test</scope -->
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
+			<!-- scope>test</scope -->
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
+			<!-- scope>test</scope -->
 		</dependency>
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>
