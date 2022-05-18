@@ -79,6 +79,12 @@ public class Example6b_OnionDependenciesTest {
                 .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.persistence..")
                 .adapter("cli", PACKAGE_PREFIX + ".infrastructure.cli..")
                 .adapter("monitoring", PACKAGE_PREFIX + ".infrastructure.monitoring..")
+                // ignore all dependencies to java..
+                .ignoreDependency(isEcommerceClass, isJavaClass)
+                // ignore all dependencies to ...common.Event
+                .ignoreDependency(isEcommerceClass, isEventClass)
+                // ignore allJMolecules annotations
+                .ignoreDependency(isEcommerceClass, isJMoleculesAnnotationClass)
                 .because("we want to enforce the onion architecure inside each component")
                 .check(classesFromEcommerceExample);
     }
