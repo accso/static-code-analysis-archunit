@@ -6,9 +6,10 @@ import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.CacheMode;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import org.junit.jupiter.api.Disabled;
 
 @AnalyzeClasses(packages = "de.accso.library", cacheMode = CacheMode.FOREVER)
-//@Disabled("ArchUnit test fails because of an intentional violation: AuthorizationImpl is not in an impl package, see @ArchIgnore below")
+@Disabled("ArchUnit test fails because of an intentional violation: AuthorizationImpl is not in an impl package, see @ArchIgnore below")
 public class Example1_NamingConventionsTestWithJUnit5 {
 
     /**

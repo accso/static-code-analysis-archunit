@@ -9,15 +9,15 @@
 	<properties>
 		<java.version>11</java.version>
 
-		<kotlin.version>1.5.30</kotlin.version>
+		<kotlin.version>1.6.0</kotlin.version>
 		<kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
-		<archunit.version>0.23.0</archunit.version>
+		<archunit.version>1.0.0</archunit.version>
 
 		<junit.version>5.8.1</junit.version>
 		<assertj.version>3.21.0</assertj.version>
-		<jmolecules.version>1.4.0</jmolecules.version>
-		<jmolecules.integration.version>0.8.0</jmolecules.integration.version>
+		<jmolecules.version>1.6.0</jmolecules.version>
+		<jmolecules.integration.version>1.6.0</jmolecules.integration.version>
 
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -96,6 +96,12 @@
 			<groupId>org.jmolecules</groupId>
 			<artifactId>jmolecules-layered-architecture</artifactId>
 			<version>${jmolecules.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.4.3</version>
 		</dependency>
 
 	</dependencies>

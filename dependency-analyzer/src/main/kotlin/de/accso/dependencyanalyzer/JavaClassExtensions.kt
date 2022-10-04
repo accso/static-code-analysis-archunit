@@ -1,6 +1,6 @@
 package de.accso.dependencyanalyzer
 
-import com.tngtech.archunit.base.PackageMatcher
+import com.tngtech.archunit.core.domain.PackageMatcher
 import com.tngtech.archunit.core.domain.JavaClass
 import com.tngtech.archunit.core.domain.JavaClasses
 import kotlin.reflect.KClass

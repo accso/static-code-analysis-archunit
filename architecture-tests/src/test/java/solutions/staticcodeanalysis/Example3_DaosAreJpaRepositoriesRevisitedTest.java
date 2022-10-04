@@ -25,7 +25,7 @@ class Example3_DaosAreJpaRepositoriesRevisitedTest {
         DescribedPredicate<JavaClass> predicateClassImplementsJpaRepository =
                 new DescribedPredicate<>("class implements JpaRepository") {
                     @Override
-                    public boolean apply(JavaClass clazz) {
+                    public boolean test(JavaClass clazz) {
                         // return (JpaRepository.class.isAssignableFrom(clazz.reflect()));
                         return clazz.isAssignableTo(JpaRepository.class);
                     }
@@ -34,7 +34,7 @@ class Example3_DaosAreJpaRepositoriesRevisitedTest {
         DescribedPredicate<JavaClass> predicateClassIsADao =
                 new DescribedPredicate<>("class is a Dao") {
                     @Override
-                    public boolean apply(JavaClass clazz) {
+                    public boolean test(JavaClass clazz) {
                         return clazz.getSimpleName().toLowerCase().endsWith("dao");
                     }
                 };

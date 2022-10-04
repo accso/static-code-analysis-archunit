@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
+@Disabled("ArchUnit test fails because of an intentional violation: Correct onion architecture is not observed")
 public class Example6b_OnionDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
@@ -29,7 +30,7 @@ public class Example6b_OnionDependenciesTest {
         Layer(String name, String pkg) { this.name = name; this.pkg = pkg; }
     }
 
-    // test failed in v0.22.0 with line below (*) activated. This was an ArchUnit issue, see https://github.com/TNG/ArchUnit/issues/739
+    // test failed with ArchUnit v0.22.0, see issue https://github.com/TNG/ArchUnit/issues/739
     @Test
     void test_onion_architecture_inside_one_component_using_layers() {
         // arrange
@@ -40,6 +41,7 @@ public class Example6b_OnionDependenciesTest {
         Layer uiLayer             = new Layer("UI",         PACKAGE_PREFIX_WITH_WILDCARD + ".ui..");
 
         Architectures.LayeredArchitecture layeredArchitecture = Architectures.layeredArchitecture()
+                .consideringAllDependencies()
                 .withOptionalLayers(true)
                 .layer(apiLayer.name).definedBy(apiLayer.pkg)
                 .layer(applicationLayer.name).definedBy(applicationLayer.pkg)
@@ -93,28 +95,28 @@ public class Example6b_OnionDependenciesTest {
 
     DescribedPredicate<JavaClass> isEventClass = new DescribedPredicate<>("is common.Event class") {
         @Override
-        public boolean apply(JavaClass clazz) {
+        public boolean test(JavaClass clazz) {
             return clazz.isAssignableTo(Event.class);
         }
     };
 
     DescribedPredicate<JavaClass> isJavaClass = new DescribedPredicate<>("is Java class") {
         @Override
-        public boolean apply(JavaClass clazz) {
+        public boolean test(JavaClass clazz) {
             return clazz.getPackageName().startsWith("java");
         }
     };
 
     DescribedPredicate<JavaClass> isEcommerceClass = new DescribedPredicate<>("is any Ecommerce class") {
         @Override
-        public boolean apply(JavaClass clazz) {
+        public boolean test(JavaClass clazz) {
             return clazz.getPackageName().startsWith(PACKAGE_PREFIX);
         }
     };
 
     DescribedPredicate<JavaClass> isJMoleculesAnnotationClass = new DescribedPredicate<>("is any JMolecules annotation") {
         @Override
-        public boolean apply(JavaClass clazz) {
+        public boolean test(JavaClass clazz) {
             return clazz.isAnnotation() && clazz.getPackageName().startsWith("org.jmolecules");
         }
     };

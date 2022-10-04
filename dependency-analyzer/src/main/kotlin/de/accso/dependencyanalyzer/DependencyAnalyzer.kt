@@ -32,7 +32,7 @@ class DependencyAnalyzer(private val analyzeDependenciesOnPackagesWithPrefix: St
 //TODO is the following "that" really needed or is this redundant to the "importPackages" already?
                 .that(
                     object: DescribedPredicate<JavaClass>("package starts with given value") {
-                        override fun apply(clazz: JavaClass) =
+                        override fun test(clazz: JavaClass) =
                             clazz.packageName.startsWith(analyzeDependenciesOnPackagesWithPrefix)
                     }
                 )
