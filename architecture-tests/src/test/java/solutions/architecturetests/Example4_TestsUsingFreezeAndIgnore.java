@@ -17,6 +17,8 @@ public class Example4_TestsUsingFreezeAndIgnore {
      * example 4 - library example - test by ignoring some classes - see globally active archunit_ignore_patterns.txt
      */
 
+    // test fails
+
     @Test
     void test_implementation_classes_must_reside_in_a_packaged_named_impl_ignore_authorization() {
         ArchRuleDefinition.classes()

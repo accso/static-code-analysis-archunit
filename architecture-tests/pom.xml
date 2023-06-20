@@ -3,14 +3,14 @@
 	<parent>
 		<artifactId>static-code-analysis-archunit</artifactId>
 		<groupId>de.accso</groupId>
-		<version>0.1</version>
+		<version>0.11</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.accso</groupId>
 	<artifactId>architecture-tests</artifactId>
-	<version>0.1</version>
+	<version>0.11</version>
 	<packaging>jar</packaging>
 
 	<build>
@@ -46,17 +46,17 @@
 		<dependency>
 			<groupId>de.accso</groupId>
 			<artifactId>dependency-analyzer</artifactId>
-			<version>0.1</version>
+			<version>0.11</version>
 		</dependency>
 		<dependency>
 			<groupId>de.accso</groupId>
 			<artifactId>library-example</artifactId>
-			<version>0.1</version>
+			<version>0.11</version>
 		</dependency>
 		<dependency>
 			<groupId>de.accso</groupId>
 			<artifactId>ecommerce-example</artifactId>
-			<version>0.1</version>
+			<version>0.11</version>
 		</dependency>
 
 		<dependency>

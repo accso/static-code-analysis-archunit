@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
      ...
 */
 
-@Disabled("Test using JMolecules fails because of a runtime error with ArchUnit 1.0.0 and JMolecules 1.6.0")
+@Disabled("Test using JMolecules fails because of a runtime error NoSuchMethodError - using ArchUnit 1.0.0 and JMolecules 1.6.0")
 //@Disabled("Test using JMolecules fails because of an intentional violation: Wrong layering in the eCommerce example")
 public class Example7_JMoleculesTests {
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
