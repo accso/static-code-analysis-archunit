@@ -1,2 +1,2 @@
-# ignore all violations in AuthorizationImpl
-# .*\.common\.security\.AuthorizationImpl.*
+# ignore all violations in EntityDao
+#.*\.datamanagement\.manager\.EntityDao.*

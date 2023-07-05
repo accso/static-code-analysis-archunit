@@ -3,9 +3,9 @@ package examples.architecturetests;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
-import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Disabled("Class is a live coding template, therefore empty")
 public class Example4_TestsUsingFreezeAndIgnore {
@@ -18,15 +18,10 @@ public class Example4_TestsUsingFreezeAndIgnore {
      */
 
     @Test
-    void test_implementation_classes_must_reside_in_a_packaged_named_impl_ignore_authorization() {
-
-        // TODO live coding - example 4 (ignore via archunit_ignore_patterns.txt)
-
+    void test_each_dao_is_a_jparepository_ignore_entitydao() {
         ArchRuleDefinition.classes()
-                .that()
-                .haveSimpleNameEndingWith("Impl")
-                .should()
-                .resideInAPackage("..impl")
+                .that().haveSimpleNameEndingWith("Dao")
+                .should().beAssignableTo(JpaRepository.class)
                 .check(classesFromLibraryExample);
     }
 
@@ -39,10 +34,8 @@ public class Example4_TestsUsingFreezeAndIgnore {
         // TODO live coding - example 4 (ignore with freezing)
 
         ArchRuleDefinition.classes()
-                .that()
-                .haveSimpleNameEndingWith("Impl")
-                .should()
-                .resideInAPackage("..impl")
+                .that().haveSimpleNameEndingWith("Dao")
+                .should().beAssignableTo(JpaRepository.class)
                 .check(classesFromLibraryExample);
     }
 }

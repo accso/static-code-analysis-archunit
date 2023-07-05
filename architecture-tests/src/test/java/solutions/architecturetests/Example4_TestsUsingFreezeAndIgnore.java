@@ -6,6 +6,7 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import com.tngtech.archunit.library.freeze.FreezingArchRule;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Disabled("ArchUnit test fails because of an intentional violation: AuthorizationImpl is neither ignored in the ignore_patterns file nor frozen")
 public class Example4_TestsUsingFreezeAndIgnore {
@@ -20,12 +21,10 @@ public class Example4_TestsUsingFreezeAndIgnore {
     // test fails
 
     @Test
-    void test_implementation_classes_must_reside_in_a_packaged_named_impl_ignore_authorization() {
+    void test_each_dao_is_a_jparepository_ignore_entitydao() {
         ArchRuleDefinition.classes()
-                .that()
-                .haveSimpleNameEndingWith("Impl")
-                .should()
-                .resideInAPackage("..impl")
+                .that().haveSimpleNameEndingWith("Dao")
+                .should().beAssignableTo(JpaRepository.class)
                 .check(classesFromLibraryExample);
     }
 
@@ -33,13 +32,11 @@ public class Example4_TestsUsingFreezeAndIgnore {
      * example 4 - library example - freeze violations which should be ignored
      */
     @Test
-    void test_implementation_classes_must_reside_in_a_package_named_impl_with_freezing() {
+    void test_each_dao_is_a_jparepository_with_freezing() {
         FreezingArchRule.freeze(
-                ArchRuleDefinition.classes()
-                        .that()
-                        .haveSimpleNameEndingWith("Impl")
-                        .should()
-                        .resideInAPackage("..impl")
+                        ArchRuleDefinition.classes()
+                                .that().haveSimpleNameEndingWith("Dao")
+                                .should().beAssignableTo(JpaRepository.class)
         )
         .check(classesFromLibraryExample);
     }
