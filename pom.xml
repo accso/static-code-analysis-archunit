@@ -16,8 +16,6 @@
 
 		<junit.version>5.9.3</junit.version>
 		<assertj.version>3.24.2</assertj.version>
-		<jmolecules.version>1.6.0</jmolecules.version>
-		<jmolecules.integration.version>1.6.0</jmolecules.integration.version>
 
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -77,25 +75,6 @@
 			<artifactId>archunit</artifactId>
 			<version>${archunit.version}</version>
 			<!-- scope>test</scope -->
-		</dependency>
-
-		<!-- jMolecules -->
-		<dependency>
-			<groupId>org.jmolecules</groupId>
-			<artifactId>jmolecules-ddd</artifactId>
-			<version>${jmolecules.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jmolecules.integrations/jmolecules-archunit -->
-		<dependency>
-			<groupId>org.jmolecules.integrations</groupId>
-			<artifactId>jmolecules-archunit</artifactId>
-			<version>${jmolecules.integration.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jmolecules/jmolecules-layered-architecture -->
-		<dependency>
-			<groupId>org.jmolecules</groupId>
-			<artifactId>jmolecules-layered-architecture</artifactId>
-			<version>${jmolecules.version}</version>
 		</dependency>
 
 		<dependency>
