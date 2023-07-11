@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Disabled("ArchUnit test fails because of an intentional violation: The eCommerce example has cycles in slices and also some wrong dependencies")
-public class Example6a_CyclesAndComponentDependenciesTest {
+public class Example6a_BusinessVerticlesCyclesAndDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 6a - ecommerce example - testing cycles, dependencies on components
+     * example 6a - ecommerce example - testing cycles, dependencies on business verticles (aka slices)
      */
 
     // TODO live coding - example 6a (ecommerce, cycles, component dependencies)
@@ -37,21 +37,21 @@ public class Example6a_CyclesAndComponentDependenciesTest {
 
     // ---------------------------------------------------------------------------------------------
 
-    class Component {
+    class BusinessVerticle {
         String name;
         String pkg;
-        Component(String name, String pkg) { this.name = name; this.pkg = pkg; }
+        BusinessVerticle(String name, String pkg) { this.name = name; this.pkg = pkg; }
     }
 
     // test fails because of wrong dependencies in SalesEventProducer to ShippingMessaging (instead of SalesMessaging)
     @Test
     void test_component_have_defined_dependencies() {
         // arrange
-        Component billing   = new Component("Billing",   "..billing..");
-        Component common    = new Component("Common",    "..common..");
-        Component sales     = new Component("Sales",     "..sales..");
-        Component shipping  = new Component("Shipping",  "..shipping..");
-        Component warehouse = new Component("Warehouse", "..warehouse..");
+        BusinessVerticle billing   = new BusinessVerticle("Billing",   "..billing..");
+        BusinessVerticle common    = new BusinessVerticle("Common",    "..common..");
+        BusinessVerticle sales     = new BusinessVerticle("Sales",     "..sales..");
+        BusinessVerticle shipping  = new BusinessVerticle("Shipping",  "..shipping..");
+        BusinessVerticle warehouse = new BusinessVerticle("Warehouse", "..warehouse..");
 
         // act and assert
         checkDependencies(billing,   common, shipping, sales);
@@ -60,16 +60,16 @@ public class Example6a_CyclesAndComponentDependenciesTest {
         checkDependencies(warehouse, common);
         checkDependencies(common);
     }
-    private void checkDependencies(Component from, Component... to) {
+    private void checkDependencies(BusinessVerticle from, BusinessVerticle... to) {
         List<String> toPackages = Arrays.stream(to).map(c -> c.pkg).collect(Collectors.toList());
-        toPackages.add("java..");  // add depdendency to java as default
-        toPackages.add(from.pkg); // add self as allowed dependency
+        toPackages.add("java..");  // add dependency to java as default
+        toPackages.add(from.pkg);  // add self as allowed dependency
         String[] toPackagesWithJava = toPackages.toArray(String[]::new);
 
         ArchRuleDefinition.classes()
                 .that().resideInAnyPackage(from.pkg)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(toPackagesWithJava)
-                .because("we want to manage dependencies from component " + from.name + " explicitely")
+                .because("we want to manage dependencies from business verticle " + from.name + " explicitely")
                 .check(classesFromEcommerceExample);
     }
 }
