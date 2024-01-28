@@ -31,7 +31,7 @@ public class Example5_TestsUsingFreezeAndIgnore {
     @Test
     void test_implementation_classes_must_reside_in_a_package_named_impl_with_freezing() {
 
-        // TODO live coding - example 4 (ignore with freezing)
+        // TODO live coding - example 5 (ignore with freezing)
 
         ArchRuleDefinition.classes()
                 .that().haveSimpleNameEndingWith("Dao")
