@@ -9,14 +9,14 @@ import de.accso.library.datamanagement.model.MediaType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class Example5_TransitiveDependenciesTest {
+class Example6_TransitiveDependenciesTest {
 
     /**
-     * example 5 - library example - Kotlin - get transitive dependencies and dependency chains
+     * example 6 - library example - Kotlin - get transitive dependencies and dependency chains
      */
     private val TESTSET_PACKAGE_PREFIX_TO_BE_ANALYZED = "de.accso.library"
 
-    // TODO live coding - example 5 (transitive dependencies)
+    // TODO live coding - example 6 (transitive dependencies)
 
     @Test
     fun `find all transitive dependencies to class Book in datamanagement`() {

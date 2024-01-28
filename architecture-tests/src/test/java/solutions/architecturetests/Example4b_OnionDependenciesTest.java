@@ -13,17 +13,17 @@ import org.junit.jupiter.api.Test;
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
 @Disabled("ArchUnit test fails because of an intentional violation: Correct onion architecture is not observed")
-public class Example6b_OnionDependenciesTest {
+public class Example4b_OnionDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
     private static final String PACKAGE_PREFIX_WITH_WILDCARD = ".";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 6b - ecommerce example - testing onion architecture (via layers)
+     * example 4b - ecommerce example - testing onion architecture (via layers)
      */
 
-    // TODO live coding - example 6b (ecommerce, onion/layers)
+    // TODO live coding - example 4b (ecommerce, onion/layers)
 
     class Layer {
         String name;

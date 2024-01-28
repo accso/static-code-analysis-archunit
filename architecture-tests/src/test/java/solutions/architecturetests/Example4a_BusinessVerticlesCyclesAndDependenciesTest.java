@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Disabled("ArchUnit test fails because of an intentional violation: The eCommerce example has cycles in slices and also some wrong dependencies")
-public class Example6a_BusinessVerticlesCyclesAndDependenciesTest {
+public class Example4a_BusinessVerticlesCyclesAndDependenciesTest {
 
     private static final String PACKAGE_PREFIX = "de.accso.ecommerce.";
     private static JavaClasses classesFromEcommerceExample = new ClassFileImporter().importPackages(PACKAGE_PREFIX);
 
     /**
-     * example 6a - ecommerce example - testing cycles, dependencies on business verticles (aka slices)
+     * example 4a - ecommerce example - testing cycles, dependencies on business verticles (aka slices)
      */
 
-    // TODO live coding - example 6a (ecommerce, cycles, component dependencies)
+    // TODO live coding - example 4a (ecommerce, cycles, component dependencies)
 
     // test fails because of sales->shipping->sales cycle
     @Test
