@@ -77,9 +77,11 @@ public class Example4b_OnionDependenciesTest {
                 .domainModels       (PACKAGE_PREFIX + ".core.domain.model..")
                 .domainServices     (PACKAGE_PREFIX + ".core.domain.services..")
                 .applicationServices(PACKAGE_PREFIX + ".core.application..")
-                .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.persistence..")
                 .adapter(        "cli", PACKAGE_PREFIX + ".infrastructure.cli..")
+                .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.config..")
+                .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.messaging..")
                 .adapter( "monitoring", PACKAGE_PREFIX + ".infrastructure.monitoring..")
+                .adapter("persistence", PACKAGE_PREFIX + ".infrastructure.persistence..")
                 // ignore all dependencies to java..
                 .ignoreDependency(isEcommerceClass, isJavaClass)
                 // ignore all dependencies to ...common.Event
